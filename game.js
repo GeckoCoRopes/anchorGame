@@ -235,7 +235,11 @@ inputForm.addEventListener('submit', function(e) {
     }
     // Check for investigation synonyms, allow 'c' as shortcut
     // Now support: inspect <component> <key>
-    const match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
+    let match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
+    if (!match) {
+      match = value.match(/^(c)(\d+)$/i);
+      if (match) match = [match[0], match[1], match[2]];
+    }
     if (match) {
       let query = match[2].toLowerCase();
       const displayNames = {
@@ -298,7 +302,11 @@ inputForm.addEventListener('submit', function(e) {
           if (difficulty === 'hard') {
             // 70% chance to return ok even if failed
             if (Math.random() < 0.7) {
-              anchorOutput.textContent += `\nLooks OK.`;
+              if (comp.desc) {
+                anchorOutput.textContent += `\n${comp.desc}`;
+              } else {
+                anchorOutput.textContent += `\nNo further information.`;
+              }
               checkedComponents[matchedType] = 'ok';
             } else {
               anchorOutput.textContent += `\n${fail.text}`;
