@@ -4,6 +4,7 @@ const dieBtn = document.getElementById('die-btn');
 const inputForm = document.getElementById('input-form');
 const userInput = document.getElementById('user-input');
 const nextBtn = document.getElementById('next-btn');
+const difficultySelect = document.getElementById('difficulty-select');
 
 const componentTypes = [
   'anchor',
@@ -16,6 +17,8 @@ const componentTypes = [
 ];
 
 let components = {};
+let checkedComponents = {};
+let difficulty = 'medium';
 
 // Load all component configs
 async function loadComponents() {
@@ -48,15 +51,29 @@ function renderAnchor(anchor) {
   // Only update the anchor-components-chosen list, do not show anchorOutput text or descriptions
   const ul = document.getElementById('anchor-components-chosen');
   ul.innerHTML = '';
+  const displayNames = {
+    top_connector: 'Anchor Crab',
+    middle_connector: 'Swivel Crab',
+    bottom_connector: 'Ring Crab'
+  };
   for (const type of componentTypes) {
     const comp = anchor[type];
     if (comp && comp.name && comp.name !== 'None') {
       const li = document.createElement('li');
       const typeSpan = document.createElement('span');
       typeSpan.className = 'component-type-label';
-      typeSpan.textContent = type.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) + ': ';
+      const label = displayNames[type] || type.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+      typeSpan.textContent = label + ': ';
       li.appendChild(typeSpan);
       li.appendChild(document.createTextNode(comp.name));
+      // Color if checked (only in easy mode)
+      if (difficulty === 'easy' && checkedComponents[type]) {
+        if (checkedComponents[type] === 'fail') {
+          li.style.color = '#ffd600'; // yellow
+        } else if (checkedComponents[type] === 'ok') {
+          li.style.color = '#00e676'; // green
+        }
+      }
       ul.appendChild(li);
     }
   }
@@ -140,35 +157,82 @@ dieBtn.onclick = () => {
 };
 
 nextBtn.onclick = () => {
+  anchorOutput.textContent = '';
+  checkedComponents = {};
   showRandomAnchor();
   setButtonsState({flyDie: true, next: false});
 };
 
 inputForm.addEventListener('submit', function(e) {
   e.preventDefault();
+  // If Next is visible, pressing Enter triggers Next
+  if (nextBtn.style.display !== 'none') {
+    nextBtn.onclick();
+    userInput.value = '';
+    return;
+  }
   const value = userInput.value.trim();
   if (value) {
     anchorOutput.textContent += `\n> ${value}`;
-    // Check for investigation synonyms
-    const match = value.match(/^(investigate|check|inspect|examine|look at)\s+(.+)$/i);
+    // Show instructions on 'help', hide on 'hide help'
+    if (/^help$/i.test(value)) {
+      document.getElementById('anchor-instructions').style.display = '';
+      userInput.value = '';
+      return;
+    }
+    if (/^hide help$/i.test(value)) {
+      document.getElementById('anchor-instructions').style.display = 'none';
+      userInput.value = '';
+      return;
+    }
+    // Fly/Die text commands
+    if (/^fly$/i.test(value)) {
+      flyBtn.onclick();
+      userInput.value = '';
+      return;
+    }
+    if (/^die$/i.test(value)) {
+      dieBtn.onclick();
+      userInput.value = '';
+      return;
+    }
+    // Check for investigation synonyms, allow 'c' as shortcut
+    const match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
     if (match) {
-      const query = match[2].toLowerCase();
+      let query = match[2].toLowerCase();
+      const displayNames = {
+        top_connector: 'Anchor Crab',
+        middle_connector: 'Swivel Crab',
+        bottom_connector: 'Ring Crab'
+      };
       let found = false;
-      // Try to match by component type or name
-      for (const type of componentTypes) {
+      for (let i = 0; i < componentTypes.length; i++) {
+        const type = componentTypes[i];
         const comp = currentAnchor[type];
         if (!comp || comp.name === 'None') continue;
         const typeLabel = type.replace('_', ' ').toLowerCase();
-        if (query === typeLabel || query === comp.name.toLowerCase()) {
+        const displayLabel = (displayNames[type] || '').toLowerCase();
+        // Allow number alias (1-based)
+        const numberAlias = (i + 1).toString();
+        if (
+          query === typeLabel ||
+          query === comp.name.toLowerCase() ||
+          (displayLabel && query === displayLabel) ||
+          query === numberAlias
+        ) {
           // Check if this component failed
           const fail = currentFailures.find(f => f.component === type && f.name === comp.name);
           if (fail) {
             anchorOutput.textContent += `\n${fail.text}`;
+            checkedComponents[type] = 'fail';
           } else if (comp.desc) {
             anchorOutput.textContent += `\n${comp.desc}`;
+            checkedComponents[type] = 'ok';
           } else {
             anchorOutput.textContent += `\nNo further information.`;
+            checkedComponents[type] = 'ok';
           }
+          renderAnchor(currentAnchor);
           found = true;
           break;
         }
@@ -179,6 +243,11 @@ inputForm.addEventListener('submit', function(e) {
     }
   }
   userInput.value = '';
+});
+
+difficultySelect.addEventListener('change', function() {
+  difficulty = difficultySelect.value;
+  renderAnchor(currentAnchor);
 });
 
 document.addEventListener('DOMContentLoaded', async () => {

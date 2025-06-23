@@ -2,23 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>GeckoCo Ropes - Fly or Die</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%AA%A2%3C/text%3E%3C/svg%3E">
   <style>
-    body { font-family: monospace; background: #181818; color: inherit; margin: 0; padding: 0; }
-    #anchor-container { max-width: 600px; margin: 40px auto; background: #222; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #0008; color: #fff; }
-    #anchor-logo { display: block; margin: 0 auto 16px auto; max-width: 50px; border-radius: 8px; }
+    html, body { height: 100%; margin: 0; padding: 0; box-sizing: border-box; overflow-x: hidden; }
+    body { font-family: monospace; background: #181818; color: inherit; margin: 0; padding: 0; min-height: 100vh; }
+    #anchor-container { max-width: 600px; width: 95vw; margin: 24px auto; background: #222; padding: 4vw 4vw 24px 4vw; border-radius: 8px; box-shadow: 0 2px 8px #0008; color: #fff; }
+    #anchor-logo { display: block; margin: 0 auto 16px auto; max-width: 50px; width: 15vw; min-width: 40px; border-radius: 8px; height: auto; }
     #gecko-img { display: block; margin: 0 auto 24px auto; max-width: 300px; width: 100%; height: auto; }
-    #anchor-output { min-height: 200px; white-space: pre-wrap; margin-bottom: 16px; color: #fff; }
-    #button-row { display: flex; gap: 16px; justify-content: center; }
-    button { padding: 12px 32px; font-size: 1.1em; border-radius: 6px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; }
-    button:hover { background: #666; }
-    input#user-input { color: #fff; background: #333; }
+    #anchor-output { min-height: 120px; white-space: pre-wrap; margin-bottom: 16px; color: #fff; font-size: 1em; word-break: break-word; }
+    #button-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    button, #next-btn { padding: 14px 6vw; font-size: 1.1em; border-radius: 6px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-width: 90px; margin-bottom: 8px; }
+    button:hover, #next-btn:hover { background: #666; }
+    input#user-input { color: #fff; background: #333; font-size: 1.1em; padding: 12px 10px; border-radius: 4px 0 0 4px; border: none; width: 0; min-width: 0; flex: 1 1 0; }
     input#user-input::placeholder { color: #fff; opacity: 0.7; }
-    form#input-form { width: 100%; }
-    .component-type-label { color: #aaa; font-size: 0.95em; margin-right: 0.5em; }
-    #anchor-components-chosen { color: #fff; }
+    form#input-form { width: 100%; margin-bottom: 0; }
+    .component-type-label {
+      color: #aaa;
+      font-size: 0.95em;
+      margin-right: 0.5em;
+      text-align: right;
+      justify-self: end;
+      white-space: nowrap;
+    }
+    #anchor-components-chosen {
+      color: #fff;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.2em 1em;
+      align-items: baseline;
+      margin-top: 10px;
+    }
+    #anchor-components-chosen li {
+      display: contents;
+    }
+    @media (max-width: 600px) {
+      #anchor-container { padding: 4vw 2vw 18vw 2vw; }
+      #anchor-logo { max-width: 40px; }
+      #gecko-img { max-width: 90vw; }
+      button, #next-btn { font-size: 1em; min-width: 70px; padding: 12px 4vw; }
+      #anchor-output { font-size: 0.98em; }
+    }
   </style>
 </head>
 <body>
@@ -27,12 +52,20 @@
       <a href="https://geckocoropes.au" target="_blank" rel="noopener">
         <img id="anchor-logo" src="images/Gecko_Square_BlackBG.png" alt="Anchor Game Logo" style="margin:0; max-width:50px;" />
       </a>
-      <div style="flex:1;">
-        <div id="anchor-components-list" style="margin-bottom:18px; text-align:center; font-size:1.1em; letter-spacing:1px;">
-          <strong>The anchor consists of:</strong>
-          <ul id="anchor-components-chosen" style="list-style:none; padding:0; margin:10px 0 0 0; text-align:center;"></ul>
+      <div style="flex:1; margin-left:24px;">
+        <div style="display:flex; justify-content:center; margin-bottom:12px;">
+          <label for="difficulty-select" style="color:#fff; font-size:1em; margin-right:8px;">Difficulty:</label>
+          <select id="difficulty-select" style="font-size:1em; padding:4px 8px; border-radius:4px;">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
         </div>
-        <div id="anchor-instructions" style="margin: 18px 0 0 0; text-align: center; font-size: 1em; color: #fff;">
+        <div id="anchor-components-list" style="margin-bottom:18px; text-align:left; font-size:1.1em; letter-spacing:1px;">
+          <strong>The anchor consists of:</strong>
+          <ul id="anchor-components-chosen" style="list-style:none; padding:0; margin:10px 0 0 0; text-align:left;"></ul>
+        </div>
+        <div id="anchor-instructions" style="margin: 18px 0 0 0; text-align: center; font-size: 1em; color: #fff; display: none;">
           <strong>Instructions:</strong> Type <code>investigate</code>, <code>check</code>, <code>inspect</code>, <code>examine</code>, or <code>look at</code> followed by a component type or name (e.g., <code>inspect sling</code>) to get more information about that part of the anchor.
         </div>
       </div>
@@ -46,15 +79,19 @@
       <input id="user-input" type="text" placeholder="Type a command..." style="flex:1; padding:8px; font-size:1em; border-radius:4px 0 0 4px; border:none;" />
       <button id="submit-btn" type="submit" style="padding:8px 16px; font-size:1em; border-radius:0 4px 4px 0; border:none; background:#444; color:#fff; cursor:pointer;">Go</button>
     </form>
+    <div style="text-align:center; font-size:0.95em; color:#ccc; margin-top:6px;">
+      Type <code>help</code> for instructions, <code>hide help</code> to hide them.
+    </div>
     <div style="display:flex; justify-content:center; margin-top:16px;">
       <button id="next-btn" style="display:none; padding:12px 32px; font-size:1.1em; border-radius:6px; border:none; background:#444; color:#fff; cursor:pointer;">Next</button>
-    </div>
-    <div style="display:flex; justify-content:center; margin-top:24px;">
-      <a href="https://ko-fi.com/geckoco" target="_blank" rel="noopener" style="display:inline-block; background:#29abe0; color:#fff; font-weight:bold; padding:10px 28px; border-radius:6px; text-decoration:none; font-size:1.1em; box-shadow:0 2px 8px #0004;">Support us on Ko-fi</a>
     </div>
     <a href="https://geckocoropes.au" target="_blank" rel="noopener">
       <img id="gecko-img" src="images/GECKO_horizontal_BlackBG.png" alt="Gecko Horizontal" title="Visit Gecko Co Ropes" />
     </a>
+    <div style="display:flex; justify-content:center; margin-top:24px;">
+        <a href="https://ko-fi.com/geckoco" target="_blank" rel="noopener" style="display:inline-block; background:#333; color:#fff; font-weight:bold; padding:10px 28px; border-radius:6px; text-decoration:none; font-size:1.1em; box-shadow:0 2px 8px #0004; border: 1px solid #444; transition: background 0.2s, color 0.2s;">Support us on Ko-fi</a>
+      </div>
+  
   </div>
   <script src="game.js"></script>
 </body>
