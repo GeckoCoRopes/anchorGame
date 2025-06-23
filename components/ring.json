@@ -32,7 +32,7 @@
     "name": "Titanium Ring",
     "desc": "Premium, ultra-light option.",
     "potential_issues": [
-      { "key": ["crack", "damage"], "issue": "Crack detected", "text_description": "A hairline crack is visible in the titanium ring.", "failure": true },
+      { "key": ["crack", "damage", "wear"], "issue": "Crack detected", "text_description": "A hairline crack is visible in the titanium ring.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
     ],
     "min_difficulty": 3 

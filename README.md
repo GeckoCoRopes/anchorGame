@@ -48,6 +48,15 @@ You must use a local web server to run the game locally (due to browser security
 python3 -m http.server 8000
 ```
 
+## Linting
+
+To check your code for issues:
+
+- Lint JavaScript: `npm run lint:js`
+- Lint HTML: `npm run lint:html`
+
+These commands use ESLint and HTMLHint to help keep your code clean and error-free.
+
 ## Play Online
 
 Play the latest version here: [https://geckocoropes.github.io/anchorGame/](https://geckocoropes.github.io/anchorGame/)

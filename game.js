@@ -133,11 +133,28 @@ function pickFailures(anchor, count) {
 let currentAnchor = null;
 let currentFailures = [];
 
+
 function showRandomAnchor() {
   currentAnchor = generateRandomAnchor();
   renderAnchor(currentAnchor);
   const failCount = getFailureCount();
   currentFailures = pickFailures(currentAnchor, failCount);
+  // Debug output of failures (now behind checkbox)
+  const debugToggle = document.getElementById('debug-toggle');
+  let debugMsg = '';
+  if (currentFailures.length > 0) {
+    debugMsg = '[DEBUG] Failures this round:';
+    for (const fail of currentFailures) {
+      debugMsg += `\n- [${fail.component.replace('_',' ')}: ${fail.name}] ${fail.issue}`;
+    }
+  } else {
+    debugMsg = '[DEBUG] No failures this round.';
+  }
+  // Remove any previous debug info from anchorOutput
+  anchorOutput.textContent = anchorOutput.textContent.replace(/\n?\[DEBUG\][^\n]*(\n- [^\n]*)*/g, '');
+  if (debugToggle && debugToggle.checked) {
+    anchorOutput.textContent += `\n${debugMsg}\n`;
+  }
 }
 
 function setButtonsState({flyDie=true, next=false}) {
@@ -210,6 +227,7 @@ inputForm.addEventListener('submit', function(e) {
       return;
     }
     // Check for investigation synonyms, allow 'c' as shortcut
+    // Now support: inspect <component> <key>
     const match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
     if (match) {
       let query = match[2].toLowerCase();
@@ -219,36 +237,79 @@ inputForm.addEventListener('submit', function(e) {
         bottom_connector: 'Ring Crab'
       };
       let found = false;
+      // Try to split query into component and key (e.g., 'sling corrosion')
+      let queryParts = query.split(/\s+/);
+      let componentQuery = queryParts[0];
+      let keyQuery = queryParts.length > 1 ? queryParts.slice(1).join(' ') : null;
+      // Try to match component
+      let matchedType = null;
       for (let i = 0; i < componentTypes.length; i++) {
         const type = componentTypes[i];
         const comp = currentAnchor[type];
         if (!comp || comp.name === 'None') continue;
         const typeLabel = type.replace('_', ' ').toLowerCase();
         const displayLabel = (displayNames[type] || '').toLowerCase();
-        // Allow number alias (1-based)
         const numberAlias = (i + 1).toString();
         if (
-          query === typeLabel ||
-          query === comp.name.toLowerCase() ||
-          (displayLabel && query === displayLabel) ||
-          query === numberAlias
+          componentQuery === typeLabel ||
+          componentQuery === comp.name.toLowerCase() ||
+          (displayLabel && componentQuery === displayLabel) ||
+          componentQuery === numberAlias ||
+          typeLabel.includes(componentQuery) ||
+          comp.name.toLowerCase().includes(componentQuery)
         ) {
-          // Check if this component failed
-          const fail = currentFailures.find(f => f.component === type && f.name === comp.name);
-          if (fail) {
-            anchorOutput.textContent += `\n${fail.text}`;
-            checkedComponents[type] = 'fail';
-          } else if (comp.desc) {
-            anchorOutput.textContent += `\n${comp.desc}`;
-            checkedComponents[type] = 'ok';
-          } else {
-            anchorOutput.textContent += `\nNo further information.`;
-            checkedComponents[type] = 'ok';
-          }
-          renderAnchor(currentAnchor);
-          found = true;
+          matchedType = type;
           break;
         }
+      }
+      // If both component and key are specified, check for key-based inspect
+      if (matchedType && keyQuery) {
+        const comp = currentAnchor[matchedType];
+        let keyFound = false;
+        if (comp && comp.potential_issues) {
+          for (const issue of comp.potential_issues) {
+            if (issue.failure && issue.key) {
+              const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
+              if (keys.includes(keyQuery)) {
+                anchorOutput.textContent += `\n[${matchedType.replace('_',' ')}: ${comp.name}] ${issue.text_description}`;
+                checkedComponents[matchedType] = 'fail';
+                keyFound = true;
+              }
+            }
+          }
+        }
+        if (!keyFound) {
+          anchorOutput.textContent += `\nNo such failure key for that component to investigate.`;
+        }
+        renderAnchor(currentAnchor);
+        found = true;
+      } else if (matchedType) {
+        // General inspect for this component
+        const comp = currentAnchor[matchedType];
+        const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
+        if (fail) {
+          if (difficulty === 'hard') {
+            // 70% chance to return ok even if failed
+            if (Math.random() < 0.7) {
+              anchorOutput.textContent += `\nLooks OK.`;
+              checkedComponents[matchedType] = 'ok';
+            } else {
+              anchorOutput.textContent += `\n${fail.text}`;
+              checkedComponents[matchedType] = 'fail';
+            }
+          } else {
+            anchorOutput.textContent += `\n${fail.text}`;
+            checkedComponents[matchedType] = 'fail';
+          }
+        } else if (comp.desc) {
+          anchorOutput.textContent += `\n${comp.desc}`;
+          checkedComponents[matchedType] = 'ok';
+        } else {
+          anchorOutput.textContent += `\nNo further information.`;
+          checkedComponents[matchedType] = 'ok';
+        }
+        renderAnchor(currentAnchor);
+        found = true;
       }
       if (!found) {
         anchorOutput.textContent += `\nNo such component to investigate.`;
@@ -258,18 +319,8 @@ inputForm.addEventListener('submit', function(e) {
   userInput.value = '';
 });
 
-function updateDifficultyLabel() {
-  const label = document.getElementById('difficulty-label');
-  let text = '';
-  if (difficulty === 'easy') text = 'Difficulty: Easy';
-  else if (difficulty === 'medium') text = 'Difficulty: Medium';
-  else if (difficulty === 'hard') text = 'Difficulty: Hard';
-  label.textContent = text;
-}
-
 difficultySelect.addEventListener('change', function() {
   difficulty = difficultySelect.value;
-  updateDifficultyLabel();
   renderAnchor(currentAnchor);
 });
 
@@ -277,5 +328,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadComponents();
   showRandomAnchor();
   setButtonsState({flyDie: true, next: false});
-  updateDifficultyLabel();
+  // Add event listener for debug toggle
+  const debugToggle = document.getElementById('debug-toggle');
+  if (debugToggle) {
+    debugToggle.addEventListener('change', () => {
+      showRandomAnchor();
+    });
+  }
 }); 
