@@ -1,3 +1,6 @@
+[![Lint & Build Status](https://github.com/daneevans/anchorGame/actions/workflows/ci.yml/badge.svg)](https://github.com/daneevans/anchorGame/actions/workflows/ci.yml)
+[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-brightgreen?logo=dependabot)](https://github.com/daneevans/anchorGame/pulls?q=is%3Apr+author%3Aapp%2Fdependabot)
+
 [Live Site](https://geckocoropes.github.io/anchorGame/)
 
 [![Support us on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/geckoco)
