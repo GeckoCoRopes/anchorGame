@@ -133,6 +133,9 @@ function pickFailures(anchor, count) {
 let currentAnchor = null;
 let currentFailures = [];
 
+// Input history for cycling with up arrow
+let inputHistory = [];
+let historyIndex = -1;
 
 function showRandomAnchor() {
   currentAnchor = generateRandomAnchor();
@@ -199,11 +202,15 @@ inputForm.addEventListener('submit', function(e) {
   if (nextBtn.style.display !== 'none') {
     nextBtn.onclick();
     userInput.value = '';
+    historyIndex = -1;
     return;
   }
   const value = userInput.value.trim();
   if (value) {
     anchorOutput.textContent += `\n> ${value}`;
+    inputHistory.push(value);
+    if (inputHistory.length > 100) inputHistory.shift(); // Limit history size
+    historyIndex = -1;
     // Show instructions on 'help', hide on 'hide help'
     if (/^help$/i.test(value)) {
       document.getElementById('anchor-instructions').style.display = '';
@@ -319,9 +326,34 @@ inputForm.addEventListener('submit', function(e) {
   userInput.value = '';
 });
 
+// Up arrow cycles through input history
+userInput.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowUp') {
+    if (inputHistory.length === 0) return;
+    if (historyIndex === -1) historyIndex = inputHistory.length - 1;
+    else if (historyIndex > 0) historyIndex--;
+    userInput.value = inputHistory[historyIndex];
+    // Move cursor to end
+    setTimeout(() => userInput.setSelectionRange(userInput.value.length, userInput.value.length), 0);
+    e.preventDefault();
+  } else if (e.key === 'ArrowDown') {
+    if (inputHistory.length === 0) return;
+    if (historyIndex === -1) return;
+    if (historyIndex < inputHistory.length - 1) historyIndex++;
+    else { userInput.value = ''; historyIndex = -1; return; }
+    userInput.value = inputHistory[historyIndex];
+    setTimeout(() => userInput.setSelectionRange(userInput.value.length, userInput.value.length), 0);
+    e.preventDefault();
+  }
+});
+
 difficultySelect.addEventListener('change', function() {
   difficulty = difficultySelect.value;
   renderAnchor(currentAnchor);
+  // Add to input history
+  inputHistory.push(`difficulty ${difficulty}`);
+  if (inputHistory.length > 100) inputHistory.shift();
+  historyIndex = -1;
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -333,6 +365,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (debugToggle) {
     debugToggle.addEventListener('change', () => {
       showRandomAnchor();
+      // Add to input history
+      inputHistory.push(`debug ${debugToggle.checked ? 'on' : 'off'}`);
+      if (inputHistory.length > 100) inputHistory.shift();
+      historyIndex = -1;
     });
   }
 }); 
