@@ -1,57 +1,62 @@
 [
   {
-    "name": "Quick Link",
-    "desc": "A simple, threaded steel connector.",
+    "name": "None",
+    "desc": "The sling is connected directly to the anchor",
     "potential_issues": [
-      { "issue": "Thread not fully closed", "text_description": "The quick link was not fully screwed shut.", "failure": true },
-      { "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true }
+      { "key": ["wear"], "issue": "The sling is abraded", "text_description": "The sling is moving directly on the hanger, and has abraded over time.", "failure": true }
+    ]
+  },
+  {
+    "name": "Snap gate carabiner",
+    "desc": "A simple carabiner.",
+    "potential_issues": [
+      { "key": ["gate"],  "issue": "The gate is sticky", "text_description": "The gate does not close easily, and may stay stuck in the open position.", "failure": true },
+      { "key": ["wear"],  "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"],  "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
     ]
   },
   {
     "name": "Maillon Rapide",
     "desc": "Oval-shaped, strong, and reliable.",
     "potential_issues": [
-      { "issue": "Gate left open", "text_description": "The gate was left open by mistake.", "failure": true }
+      { "key": ["gate"], "issue": "Gate left open", "text_description": "The gate was left open by mistake.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated maillon", "text_description": "This maillon was sourced from a hardware store and has no markings.", "failure": true }
     ]
   },
   {
     "name": "Welded Ring",
     "desc": "A closed steel ring for permanent connections.",
     "potential_issues": [
-      { "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true }
+      { "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
     ]
   },
   {
     "name": "Locking Carabiner",
-    "desc": "Secure, auto-locking gate.",
+    "desc": "Secure, screw locked gate.",
     "potential_issues": [
-      { "issue": "Gate not locked", "text_description": "The locking mechanism failed.", "failure": true }
-    ]
-  },
-  {
-    "name": "Snap Hook",
-    "desc": "Quick and easy attachment.",
-    "potential_issues": [
-      { "issue": "Gate opens under load", "text_description": "The snap hook opened unexpectedly.", "failure": true }
+      { "key": ["gate"], "issue": "Gate not locked", "text_description": "The Screwgate has not been done up.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
     ]
   },
   {
     "name": "Delta Link",
-    "desc": "Triangular steel connector.",
+    "desc": "Triangular steel maillon connector.",
     "potential_issues": [
-      { "issue": "Improper closure", "text_description": "The delta link was not fully closed.", "failure": true }
+      { "key": ["gate"], "issue": "Improper closure", "text_description": "The delta link was not fully closed.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
     ]
-  },
-  {
-    "name": "Steel Link",
-    "desc": "Heavy-duty steel connector.",
-    "potential_issues": []
   },
   {
     "name": "Soft Shackle",
     "desc": "Lightweight textile connector.",
     "potential_issues": [
-      { "issue": "Knot slips", "text_description": "The knot in the soft shackle slipped.", "failure": true }
-    ]
+      { "key": ["knot"],  "issue": "Knot slips", "text_description": "The knot in the soft shackle slipped.", "failure": true },
+      { "key": ["knot"],  "issue": "Knot is badly formed", "text_description": "This homemade soft shackle doesn't seem to have been made properly.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true },
+      { "key": ["wear", "damage", "abrasion"], "issue": "The softshackle is damaged", "text_description": "The material has pulls, and looks to have been cut.", "failure": true }
+    ],
+    "min_difficulty": 3
   }
 ] 

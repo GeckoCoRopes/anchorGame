@@ -39,10 +39,23 @@ function getRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function getDifficultyLevel() {
+  if (difficulty === 'easy') return 1;
+  if (difficulty === 'medium') return 2;
+  if (difficulty === 'hard') return 3;
+  return 1;
+}
+
+function getFilteredComponents(type) {
+  const level = getDifficultyLevel();
+  return components[type].filter(comp => !comp.min_difficulty || comp.min_difficulty <= level);
+}
+
 function generateRandomAnchor() {
   const anchor = {};
   for (const type of componentTypes) {
-    anchor[type] = getRandom(components[type]);
+    const filtered = getFilteredComponents(type);
+    anchor[type] = getRandom(filtered);
   }
   return anchor;
 }
@@ -245,8 +258,18 @@ inputForm.addEventListener('submit', function(e) {
   userInput.value = '';
 });
 
+function updateDifficultyLabel() {
+  const label = document.getElementById('difficulty-label');
+  let text = '';
+  if (difficulty === 'easy') text = 'Difficulty: Easy';
+  else if (difficulty === 'medium') text = 'Difficulty: Medium';
+  else if (difficulty === 'hard') text = 'Difficulty: Hard';
+  label.textContent = text;
+}
+
 difficultySelect.addEventListener('change', function() {
   difficulty = difficultySelect.value;
+  updateDifficultyLabel();
   renderAnchor(currentAnchor);
 });
 
@@ -254,4 +277,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadComponents();
   showRandomAnchor();
   setButtonsState({flyDie: true, next: false});
+  updateDifficultyLabel();
 }); 

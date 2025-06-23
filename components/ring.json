@@ -1,5 +1,40 @@
 [
-  { "name": "Steel Ring", "desc": "Solid, round, and durable." },
-  { "name": "Aluminum Ring", "desc": "Lightweight and corrosion resistant." },
-  { "name": "Titanium Ring", "desc": "Premium, ultra-light option." }
+  {
+    "name": "Welded Steel Ring",
+    "desc": "Solid, round, and durable.",
+    "potential_issues": [
+      { "key": ["wear", "corrosion", "rust"], "issue": "Corrosion", "text_description": "The steel ring is rusted and weakened.", "failure": true },
+      { "key": ["damage", "sharp"], "issue": "Sharp edges", "text_description": "The steel ring has sharp edges on welds, or other damage.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
+    "name": "Wooden Gymnast Ring",
+    "desc": "Lightweight 25mm timber ring.",
+    "potential_issues": [
+      { "key": ["wear", "damage", "abrasion"], "issue": "Abrasion", "text_description": "The wooden ring shows significant wear from rope movement.", "failure": true },
+      { "key": ["wear", "damage", "abrasion"], "issue": "Raised splinters", "text_description": "The wooden ring shows splinters that may damage your ropes or slings.", "failure": true },
+      { "key": ["crack", "damage", "abrasion"], "issue": "Cracked", "text_description": "The wooden ring is showing signs of cracking.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
+    ],
+    "min_difficulty": 2 
+  },
+  {
+    "name": "CNC Aluminum Ring",
+    "desc": "Lightweight and corrosion resistant.",
+    "potential_issues": [
+      { "key": ["wear", "damage", "abrasion"], "issue": "Abrasion", "text_description": "The aluminum ring shows significant wear from rope movement.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
+    ],
+    "min_difficulty": 1
+  },
+  {
+    "name": "Titanium Ring",
+    "desc": "Premium, ultra-light option.",
+    "potential_issues": [
+      { "key": ["crack", "damage"], "issue": "Crack detected", "text_description": "A hairline crack is visible in the titanium ring.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
+    ],
+    "min_difficulty": 3 
+  }
 ] 

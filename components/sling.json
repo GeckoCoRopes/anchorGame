@@ -1,5 +1,50 @@
 [
-  { "name": "Dyneema Sling", "desc": "Ultra-light and abrasion resistant." },
-  { "name": "Nylon Webbing", "desc": "Classic, stretchy, and durable." },
-  { "name": "Chain Sling", "desc": "Linked steel chain for maximum strength." }
+  {
+    "name": "Dyneema Sling",
+    "desc": "Ultra-light and abrasion resistant.",
+    "potential_issues": [
+      { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The dyneema sling shows signs of abrasion from repeated use.", "failure": true },
+      { "key": ["uv", "sun", "faded"], "issue": "UV damage", "text_description": "The sling is faded and weakened from sun exposure.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated sling", "text_description": "This sling has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
+    "name": "Nylon Webbing",
+    "desc": "Classic, stretchy, and durable.",
+    "potential_issues": [
+      { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The nylon webbing is frayed and worn.", "failure": true },
+      { "key": ["age", "uv", "damage"], "issue": "Age", "text_description": "The nylon webbing is faded and appears to be quite old.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated webbing", "text_description": "This webbing has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
+    "name": "Round sling",
+    "desc": "Strong, heavy and durable.",
+    "potential_issues": [
+      { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The round sling is frayed and worn.", "failure": true },
+      { "key": ["age", "uv", "damage"], "issue": "Age", "text_description": "The round sling is faded and appears to be quite old.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated webbing", "text_description": "This round sling has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
+    "name": "Welded Chain",
+    "desc": "Welded steel chain for maximum durability.",
+    "potential_issues": [
+      { "key": ["corrosion", "rust"], "issue": "Corrosion", "text_description": "The chain sling is rusted and weakened.", "failure": true },
+      { "key": ["damage", "bent"], "issue": "Bent link", "text_description": "A link in the chain is visibly bent.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated chain", "text_description": "This chain has no visible strength rating.", "failure": true }
+    ],
+    "min_difficulty": 3
+  },
+  {
+    "name": "Chain of Carabiners",
+    "desc": "A linked chain of (screwgate) carabiners.",
+    "potential_issues": [
+      { "key": ["corrosion", "rust"], "issue": "Carabiner corrosion", "text_description": "One or more carabiners in the chain are rusted and weakened.", "failure": true },
+      { "key": ["damage", "bent"], "issue": "Bent carabiner", "text_description": "A carabiner in the chain is visibly bent or deformed.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated carabiner", "text_description": "One or more carabiners in the chain are not rated for load-bearing use.", "failure": true }, 
+      { "key": ["gate"], "issue": "Carabiner gate not locked", "text_description": "A carabiner in the chain has its gate unlocked or open, compromising safety.", "failure": true }
+    ],
+    "min_difficulty": 3
+  }
 ] 

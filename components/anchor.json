@@ -1,5 +1,38 @@
 [
-  { "name": "Titanium Bolt", "desc": "A lightweight, super-strong anchor bolt." },
-  { "name": "Steel Piton", "desc": "Classic steel piton for traditional placements." },
-  { "name": "Glue-In Eye", "desc": "A permanent, high-strength glue-in anchor." }
+  { 
+    "name": "Single hanger - dynabolt", 
+    "desc": "A permanent, solid anchor in hard surfaces.",
+    "potential_issues": [
+      { "key": ["moving", "loose"], "issue": "The bolt is loose!", "text_description": "The bolt is moving. It may fail at any time.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }, 
+  { 
+    "name": "Glue-In Eye", 
+    "desc": "A permanent, high-strength glue-in anchor.",
+    "potential_issues": [
+      { "key": ["moving", "loose"], "issue": "The eye bolt is loose!", "text_description": "The eyebolt is moving. The glue has failed.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }, 
+  { 
+    "name": "Glue-In Eye", 
+    "desc": "A permanent, high-strength glue-in anchor.",
+    "potential_issues": [
+      { "key": ["moving", "loose"], "issue": "The eye bolt is loose!", "text_description": "The eyebolt is moving. The glue has failed.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }, 
+  {
+    "name": "Screw-In Eye",
+    "desc": "An eye bolt threaded into timber or steel.",
+    "potential_issues": [
+      { "key": ["tight", "loose", "unscrew"], "issue": "The eye bolt is loose!", "text_description": "The eyebolt is not secured tightly. It may unscrew further, or it may fail without warning.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }
 ] 
