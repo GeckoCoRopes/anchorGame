@@ -1,3 +1,7 @@
+[Live Site](https://geckocoropes.github.io/anchorGame/)
+
+[Support us on Ko-fi](https://ko-fi.com/geckoco)
+
 # Text Adventure Game
 
 This is a simple text-based adventure game playable in your browser. Enter commands to explore, collect items, and win!

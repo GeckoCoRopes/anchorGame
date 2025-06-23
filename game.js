@@ -149,10 +149,10 @@ inputForm.addEventListener('submit', function(e) {
   const value = userInput.value.trim();
   if (value) {
     anchorOutput.textContent += `\n> ${value}`;
-    // Check for 'investigate X'
-    const match = value.match(/^investigate\s+(.+)$/i);
+    // Check for investigation synonyms
+    const match = value.match(/^(investigate|check|inspect|examine|look at)\s+(.+)$/i);
     if (match) {
-      const query = match[1].toLowerCase();
+      const query = match[2].toLowerCase();
       let found = false;
       // Try to match by component type or name
       for (const type of componentTypes) {
