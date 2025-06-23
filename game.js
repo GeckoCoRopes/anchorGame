@@ -350,9 +350,11 @@ userInput.addEventListener('keydown', function(e) {
 difficultySelect.addEventListener('change', function() {
   difficulty = difficultySelect.value;
   renderAnchor(currentAnchor);
-  // Add to input history
-  inputHistory.push(`difficulty ${difficulty}`);
+  // Add to input history and output
+  const diffMsg = `> difficulty ${difficulty}`;
+  inputHistory.push(diffMsg);
   if (inputHistory.length > 100) inputHistory.shift();
+  anchorOutput.textContent += `\n${diffMsg}`;
   historyIndex = -1;
 });
 
@@ -365,9 +367,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (debugToggle) {
     debugToggle.addEventListener('change', () => {
       showRandomAnchor();
-      // Add to input history
-      inputHistory.push(`debug ${debugToggle.checked ? 'on' : 'off'}`);
+      // Add to input history and output
+      const dbgMsg = `> debug ${debugToggle.checked ? 'on' : 'off'}`;
+      inputHistory.push(dbgMsg);
       if (inputHistory.length > 100) inputHistory.shift();
+      anchorOutput.textContent += `\n${dbgMsg}`;
       historyIndex = -1;
     });
   }
