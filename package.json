@@ -1,0 +1,15 @@
+{
+  "name": "anchorGame",
+  "version": "1.0.0",
+  "description": "Static anchor game app.",
+  "scripts": {
+    "lint:js": "eslint game.js",
+    "lint:html": "htmlhint index.html",
+    "serve": "serve ."
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "htmlhint": "^1.1.4",
+    "serve": "^14.0.1"
+  }
+} 
