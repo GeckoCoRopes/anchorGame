@@ -1,4 +1,4 @@
-[![Lint & Build Status](https://github.com/daneevans/anchorGame/actions/workflows/ci.yml/badge.svg)](https://github.com/daneevans/anchorGame/actions/workflows/ci.yml)
+[![Lint & Build Status](https://github.com/GeckoCoRopes/anchorGame/actions/workflows/ci.yml/badge.svg)](https://github.com/GeckoCoRopes/anchorGame/actions/workflows/ci.yml)
 [![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-brightgreen?logo=dependabot)](https://github.com/daneevans/anchorGame/pulls?q=is%3Apr+author%3Aapp%2Fdependabot)
 
 [Live Site](https://geckocoropes.github.io/anchorGame/)
