@@ -1,6 +1,6 @@
 [Live Site](https://geckocoropes.github.io/anchorGame/)
 
-[Support us on Ko-fi](https://ko-fi.com/geckoco)
+[![Support us on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/geckoco)
 
 # Anchor Game
 
