@@ -1,0 +1,5 @@
+[
+  { "name": "Ball Bearing Swivel", "desc": "Prevents rope twist under load." },
+  { "name": "Fixed Swivel", "desc": "Simple, non-rotating connector." },
+  { "name": "Integrated Swivel", "desc": "Built into the connector for compactness." }
+] 

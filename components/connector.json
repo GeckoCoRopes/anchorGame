@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Quick Link",
+    "desc": "A simple, threaded steel connector.",
+    "potential_issues": [
+      { "issue": "Thread not fully closed", "text_description": "The quick link was not fully screwed shut.", "failure": true },
+      { "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true }
+    ]
+  },
+  {
+    "name": "Maillon Rapide",
+    "desc": "Oval-shaped, strong, and reliable.",
+    "potential_issues": [
+      { "issue": "Gate left open", "text_description": "The gate was left open by mistake.", "failure": true }
+    ]
+  },
+  {
+    "name": "Welded Ring",
+    "desc": "A closed steel ring for permanent connections.",
+    "potential_issues": [
+      { "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true }
+    ]
+  },
+  {
+    "name": "Locking Carabiner",
+    "desc": "Secure, auto-locking gate.",
+    "potential_issues": [
+      { "issue": "Gate not locked", "text_description": "The locking mechanism failed.", "failure": true }
+    ]
+  },
+  {
+    "name": "Snap Hook",
+    "desc": "Quick and easy attachment.",
+    "potential_issues": [
+      { "issue": "Gate opens under load", "text_description": "The snap hook opened unexpectedly.", "failure": true }
+    ]
+  },
+  {
+    "name": "Delta Link",
+    "desc": "Triangular steel connector.",
+    "potential_issues": [
+      { "issue": "Improper closure", "text_description": "The delta link was not fully closed.", "failure": true }
+    ]
+  },
+  {
+    "name": "Steel Link",
+    "desc": "Heavy-duty steel connector.",
+    "potential_issues": []
+  },
+  {
+    "name": "Soft Shackle",
+    "desc": "Lightweight textile connector.",
+    "potential_issues": [
+      { "issue": "Knot slips", "text_description": "The knot in the soft shackle slipped.", "failure": true }
+    ]
+  }
+] 
