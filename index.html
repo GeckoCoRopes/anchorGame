@@ -66,7 +66,18 @@
           <ul id="anchor-components-chosen" style="list-style:none; padding:0; margin:10px 0 0 0; text-align:left;"></ul>
         </div>
         <div id="anchor-instructions" style="margin: 18px 0 0 0; text-align: center; font-size: 1em; color: #fff; display: none;">
-          <strong>Instructions:</strong> Type <code>investigate</code>, <code>check</code>, <code>inspect</code>, <code>examine</code>, or <code>look at</code> followed by a component type or name (e.g., <code>inspect sling</code>) to get more information about that part of the anchor.
+          <strong>Instructions:</strong><br>
+          <u>Difficulty:</u><br>
+          <b>Easy/Medium:</b> Inspecting a component always gives the correct answer.<br>
+          <b>Hard:</b> Inspecting a component (e.g., <code>inspect sling</code>) has a 70% chance to say "Looks OK" even if there is a hidden failure.<br>
+          <br>
+          <u>How to Inspect:</u><br>
+          Type <code>investigate</code>, <code>check</code>, <code>inspect</code>, <code>examine</code>, or <code>look at</code> followed by a component (e.g., <code>inspect sling</code>) to get more information.<br>
+          <br>
+          <b>Key-based Inspect:</b> For a guaranteed answer (even in hard mode), specify both a component and a failure key (e.g., <code>inspect anchor corrosion</code> or <code>check sling abrasion</code>).<br>
+          <br>
+          <u>Debug Info:</u><br>
+          Toggle the "Show debug info" checkbox at the bottom of the page to see the actual failures for the current round.<br>
         </div>
       </div>
     </div>
@@ -91,6 +102,9 @@
     <div style="display:flex; justify-content:center; margin-top:24px;">
         <a href="https://ko-fi.com/geckoco" target="_blank" rel="noopener" style="display:inline-block; background:#333; color:#fff; font-weight:bold; padding:10px 28px; border-radius:6px; text-decoration:none; font-size:1.1em; box-shadow:0 2px 8px #0004; border: 1px solid #444; transition: background 0.2s, color 0.2s;">Support us on Ko-fi</a>
       </div>
+    <div style="display:flex; justify-content:center; margin-top:18px;">
+      <a href="https://github.com/GeckoCoRopes/anchorGame/issues" target="_blank" rel="noopener" style="color:#ffd600; font-size:1em; text-decoration:underline;">Report bugs or feedback</a>
+    </div>
     <!-- Debug toggle moved to bottom -->
     <div style="display:flex; justify-content:center; margin-top:32px;">
       <label style="font-size:0.98em; color:#ffd600;">

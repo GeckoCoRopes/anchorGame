@@ -19,8 +19,13 @@ Anchor Game is a web-based interactive simulation where you are presented with a
   - **Next**: After making your choice, press Next to see a new anchor.
 - **Investigate Components**: Type commands in the input box to get more information about any component. Use any of these keywords:
   - `investigate`, `check`, `inspect`, `examine`, or `look at`
-  - Example: `investigate sling` or `check anchor`
-  - If the component has a hidden failure, you'll see its failure description. Otherwise, you'll see the component's description.
+  - Example: `inspect sling` or `check anchor corrosion`
+  - **General inspect** (e.g., `inspect sling`):
+    - In **easy/medium** mode, you always get the correct answer.
+    - In **hard** mode, there is a 70% chance you will be told "Looks OK" even if there is a hidden failure.
+  - **Key-based inspect** (e.g., `inspect anchor corrosion`):
+    - If you specify both a component and a failure key (from the JSON, e.g., `corrosion`, `gate`, `wear`), you will always get the correct answer for that component and key, even in hard mode.
+    - Example: `check sling abrasion` or `inspect anchor corrosion`.
 
 ## Customization
 
@@ -64,3 +69,7 @@ Play the latest version here: [https://geckocoropes.github.io/anchorGame/](https
 ## Support
 
 If you enjoy the game, consider supporting us on Ko-fi: [https://ko-fi.com/geckoco](https://ko-fi.com/geckoco)
+
+## Bugs & Feedback
+
+Please report bugs or suggest improvements here: [GitHub Issues](https://github.com/GeckoCoRopes/anchorGame/issues)
