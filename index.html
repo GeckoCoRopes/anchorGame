@@ -48,6 +48,11 @@
 </head>
 <body>
   <div id="anchor-container">
+    <div id="scoreboard" style="display: flex; justify-content: center; gap: 2em; margin-bottom: 12px; font-size: 1.1em; color: #ffd600;">
+      <span id="score-passed">Passed: 0</span>
+      <span id="score-failed">Failed: 0</span>
+      <span id="score-skipped">Skipped: 0</span>
+    </div>
     <div style="display: flex; align-items: flex-start;">
       <a href="https://geckocoropes.au" target="_blank" rel="noopener">
         <img id="anchor-logo" src="images/Gecko_Square_BlackBG.png" alt="Anchor Game Logo" style="margin:0; max-width:50px;" />
@@ -85,6 +90,7 @@
     <div id="button-row">
       <button id="fly-btn">Fly</button>
       <button id="die-btn">Die</button>
+      <button id="next-btn" style="padding:8px 18px; font-size:0.95em; border-radius:6px; border:none; background:#222; color:#aaa; cursor:pointer; opacity:0.7; margin-left:8px;">Next</button>
     </div>
     <form id="input-form" autocomplete="off" style="margin-top:24px; display:flex;">
       <input id="user-input" type="text" placeholder="Type a command..." style="flex:1; padding:8px; font-size:1em; border-radius:4px 0 0 4px; border:none;" />
@@ -92,9 +98,6 @@
     </form>
     <div style="text-align:center; font-size:0.95em; color:#ccc; margin-top:6px;">
       Type '<code>help</code>' for instructions, '<code>hide help</code>' to hide them.
-    </div>
-    <div style="display:flex; justify-content:center; margin-top:16px;">
-      <button id="next-btn" style="display:none; padding:12px 32px; font-size:1.1em; border-radius:6px; border:none; background:#444; color:#fff; cursor:pointer;">Next</button>
     </div>
     <a href="https://geckocoropes.au" target="_blank" rel="noopener">
       <img id="gecko-img" src="images/GECKO_horizontal_BlackBG.png" alt="Gecko Horizontal" title="Visit Gecko Co Ropes" />

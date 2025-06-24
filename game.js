@@ -4,6 +4,7 @@ const dieBtn = document.getElementById('die-btn');
 const inputForm = document.getElementById('input-form');
 const userInput = document.getElementById('user-input');
 const nextBtn = document.getElementById('next-btn');
+// eslint-disable-next-line no-unused-vars
 const difficultySelect = document.getElementById('difficulty-select');
 
 const componentTypes = [
@@ -19,6 +20,22 @@ const componentTypes = [
 let components = {};
 let checkedComponents = {};
 let difficulty = 'medium';
+let resultShown = false;
+let flyDieMode = 'action'; // 'action' or 'next'
+
+const displayNames = {
+  anchor: 'Anchor',
+  top_connector: 'Anchor Crab',
+  middle_connector: 'Swivel Crab',
+  bottom_connector: 'Ring Crab',
+  sling: 'Sling',
+  swivel: 'Swivel',
+  ring: 'Ring'
+};
+
+function getDisplayName(type) {
+  return displayNames[type] || type.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
 
 // Load all component configs
 async function loadComponents() {
@@ -102,36 +119,28 @@ function generateRandomAnchor() {
 }
 
 function renderAnchor(anchor) {
-  // Only update the anchor-components-chosen list, do not show anchorOutput text or descriptions
   const ul = document.getElementById('anchor-components-chosen');
   ul.innerHTML = '';
-  const displayNames = {
-    top_connector: 'Anchor Crab',
-    middle_connector: 'Swivel Crab',
-    bottom_connector: 'Ring Crab'
-  };
   for (const type of componentTypes) {
     const comp = anchor[type];
     if (comp && comp.name && comp.name !== 'None') {
       const li = document.createElement('li');
       const typeSpan = document.createElement('span');
       typeSpan.className = 'component-type-label';
-      const label = displayNames[type] || type.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const label = getDisplayName(type);
       typeSpan.textContent = label + ': ';
       li.appendChild(typeSpan);
       li.appendChild(document.createTextNode(comp.name));
-      // Color if checked (only in easy mode)
       if (difficulty === 'easy' && checkedComponents[type]) {
         if (checkedComponents[type] === 'fail') {
-          li.style.color = '#ffd600'; // yellow
+          li.style.color = '#ffd600';
         } else if (checkedComponents[type] === 'ok') {
-          li.style.color = '#00e676'; // green
+          li.style.color = '#00e676';
         }
       }
       ul.appendChild(li);
     }
   }
-  // Do not update anchorOutput here
 }
 
 function getFailureCount() {
@@ -198,6 +207,7 @@ let currentFailures = [];
 
 // Input history for cycling with up arrow
 let inputHistory = [];
+// eslint-disable-next-line no-unused-vars
 let historyIndex = -1;
 
 function showRandomAnchor() {
@@ -211,7 +221,7 @@ function showRandomAnchor() {
   if (currentFailures.length > 0) {
     debugMsg = '[DEBUG] Failures this round:';
     for (const fail of currentFailures) {
-      debugMsg += `\n- [${fail.component.replace('_',' ')}: ${fail.name}] ${fail.issue}`;
+      debugMsg += `\n- [${getDisplayName(fail.component)}: ${fail.name}] ${fail.issue}`;
     }
   } else {
     debugMsg = '[DEBUG] No failures this round.';
@@ -223,61 +233,108 @@ function showRandomAnchor() {
   }
 }
 
-function setButtonsState({flyDie=true, next=false}) {
-  flyBtn.style.display = flyDie ? '' : 'none';
-  dieBtn.style.display = flyDie ? '' : 'none';
-  nextBtn.style.display = next ? '' : 'none';
-}
+// Scoreboard state
+let score = { failed: 0, passed: 0, skipped: 0 };
 
-function getRequirementsSummary(anchor) {
-  let summary = '';
-  for (const type of componentTypes) {
-    const comp = anchor[type];
-    if (comp && comp.name && comp.name !== 'None' && comp.requires) {
-      summary += `\nA ${type.replace('_', ' ')} ${comp.name} requires a ${comp.requires.replace('_', ' ')}`;
+function updateScoreboard() {
+  const scoreboard = document.getElementById('scoreboard');
+  const debugToggle = document.getElementById('debug-toggle');
+  if (scoreboard) {
+    if (debugToggle && debugToggle.checked) {
+      scoreboard.style.display = 'none';
+    } else {
+      scoreboard.style.display = 'flex';
+      document.getElementById('score-failed').textContent = `Failed: ${score.failed}`;
+      document.getElementById('score-passed').textContent = `Passed: ${score.passed}`;
+      document.getElementById('score-skipped').textContent = `Skipped: ${score.skipped}`;
     }
   }
-  return summary;
+}
+
+function resetScoreboard() {
+  score.failed = 0;
+  score.passed = 0;
+  score.skipped = 0;
+  updateScoreboard();
+}
+
+function setNextButtonText() {
+  if (!resultShown) {
+    nextBtn.textContent = 'Skip';
+  } else {
+    nextBtn.textContent = 'Next';
+  }
+}
+
+function setFlyDieMode(mode) {
+  flyDieMode = mode;
+  // Do not change button text, only the action
 }
 
 flyBtn.onclick = () => {
+  if (flyDieMode === 'next') {
+    nextBtn.onclick();
+    return;
+  }
   if (currentFailures.length > 0) {
-    let msg = '\nYou chose to FLY!\n\nYou die.\n';
-    msg += 'Failure(s):\n';
+    let msg = '\nYou chose to FLY!\n\nYou die.\n\n';
+    msg += ' Failure(s):\n';
     for (const fail of currentFailures) {
-      msg += `- [${fail.component.replace('_',' ')}: ${fail.name}] ${fail.text}\n`;
+      msg += ` - ${getDisplayName(fail.component)} '${fail.name}': ${fail.text}\n`;
     }
     anchorOutput.textContent += msg;
+    score.failed++;
   } else {
     anchorOutput.textContent += '\nYou chose to FLY!\n\nYou live!';
+    score.passed++;
   }
-  // Show requirements summary after result
-  anchorOutput.textContent += getRequirementsSummary(currentAnchor);
-  setButtonsState({flyDie: false, next: true});
+  updateScoreboard();
+  resultShown = true;
+  setNextButtonText();
+  setFlyDieMode('next');
 };
 
 dieBtn.onclick = () => {
-  if (currentFailures.length > 0) {
-    anchorOutput.textContent += '\nYou chose to DIE!\n\nCongratulations! You avoided disaster.';
-  } else {
-    anchorOutput.textContent += '\nYou chose to DIE!\n\nBetter safe than sorry, but this was fine.';
+  if (flyDieMode === 'next') {
+    nextBtn.onclick();
+    return;
   }
-  // Show requirements summary after result
-  anchorOutput.textContent += getRequirementsSummary(currentAnchor);
-  setButtonsState({flyDie: false, next: true});
+  let msg = '\nYou chose to DIE!\n\n';
+  if (currentFailures.length > 0) {
+    msg += 'Congratulations! You avoided disaster\n\n';
+    msg += ' Failure(s):\n';
+    for (const fail of currentFailures) {
+      msg += ` - ${getDisplayName(fail.component)} '${fail.name}': ${fail.text}\n`;
+    }
+    score.passed++;
+  } else {
+    msg += 'Better safe than sorry, but this was fine.';
+    score.failed++;
+  }
+  anchorOutput.textContent += msg;
+  updateScoreboard();
+  resultShown = true;
+  setNextButtonText();
+  setFlyDieMode('next');
 };
 
 nextBtn.onclick = () => {
+  if (!resultShown) {
+    score.skipped++;
+    updateScoreboard();
+  }
   anchorOutput.textContent = '';
   checkedComponents = {};
   showRandomAnchor();
-  setButtonsState({flyDie: true, next: false});
+  resultShown = false;
+  setNextButtonText();
+  setFlyDieMode('action');
 };
 
 inputForm.addEventListener('submit', function(e) {
   e.preventDefault();
-  // If Next is visible, pressing Enter triggers Next
-  if (nextBtn.style.display !== 'none') {
+  // Only allow Enter to trigger Next if a result is shown
+  if (resultShown) {
     nextBtn.onclick();
     userInput.value = '';
     historyIndex = -1;
@@ -320,11 +377,6 @@ inputForm.addEventListener('submit', function(e) {
     }
     if (match) {
       let query = match[2].toLowerCase();
-      const displayNames = {
-        top_connector: 'Anchor Crab',
-        middle_connector: 'Swivel Crab',
-        bottom_connector: 'Ring Crab'
-      };
       let found = false;
       // Try to split query into component and key (e.g., 'sling corrosion')
       let queryParts = query.split(/\s+/);
@@ -360,7 +412,7 @@ inputForm.addEventListener('submit', function(e) {
             if (issue.failure && issue.key) {
               const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
               if (keys.includes(keyQuery)) {
-                anchorOutput.textContent += `\n[${matchedType.replace('_',' ')}: ${comp.name}] ${issue.text_description}`;
+                anchorOutput.textContent += `\n[${getDisplayName(matchedType)}: ${comp.name}] ${issue.text_description}`;
                 checkedComponents[matchedType] = 'fail';
                 keyFound = true;
               }
@@ -408,57 +460,32 @@ inputForm.addEventListener('submit', function(e) {
         anchorOutput.textContent += `\nNo such component to investigate.`;
       }
     }
+    userInput.value = '';
   }
-  userInput.value = '';
-});
-
-// Up arrow cycles through input history
-userInput.addEventListener('keydown', function(e) {
-  if (e.key === 'ArrowUp') {
-    if (inputHistory.length === 0) return;
-    if (historyIndex === -1) historyIndex = inputHistory.length - 1;
-    else if (historyIndex > 0) historyIndex--;
-    userInput.value = inputHistory[historyIndex];
-    // Move cursor to end
-    setTimeout(() => userInput.setSelectionRange(userInput.value.length, userInput.value.length), 0);
-    e.preventDefault();
-  } else if (e.key === 'ArrowDown') {
-    if (inputHistory.length === 0) return;
-    if (historyIndex === -1) return;
-    if (historyIndex < inputHistory.length - 1) historyIndex++;
-    else { userInput.value = ''; historyIndex = -1; return; }
-    userInput.value = inputHistory[historyIndex];
-    setTimeout(() => userInput.setSelectionRange(userInput.value.length, userInput.value.length), 0);
-    e.preventDefault();
-  }
-});
-
-difficultySelect.addEventListener('change', function() {
-  difficulty = difficultySelect.value;
-  renderAnchor(currentAnchor);
-  // Add to input history and output
-  const diffMsg = `> difficulty ${difficulty}`;
-  inputHistory.push(diffMsg);
-  if (inputHistory.length > 100) inputHistory.shift();
-  anchorOutput.textContent += `\n${diffMsg}`;
-  historyIndex = -1;
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadComponents();
   showRandomAnchor();
-  setButtonsState({flyDie: true, next: false});
-  // Add event listener for debug toggle
+
+  // Restore debug toggle event
   const debugToggle = document.getElementById('debug-toggle');
   if (debugToggle) {
     debugToggle.addEventListener('change', () => {
+      resetScoreboard();
       showRandomAnchor();
-      // Add to input history and output
-      const dbgMsg = `> debug ${debugToggle.checked ? 'on' : 'off'}`;
-      inputHistory.push(dbgMsg);
-      if (inputHistory.length > 100) inputHistory.shift();
-      anchorOutput.textContent += `\n${dbgMsg}`;
-      historyIndex = -1;
     });
   }
-}); 
+
+  // Restore difficulty select event
+  const difficultySelect = document.getElementById('difficulty-select');
+  if (difficultySelect) {
+    difficultySelect.addEventListener('change', function() {
+      difficulty = difficultySelect.value;
+      showRandomAnchor();
+    });
+  }
+  updateScoreboard();
+  setNextButtonText();
+  setFlyDieMode('action');
+});

@@ -6,6 +6,7 @@
     "lint:js": "eslint game.js",
     "lint:html": "htmlhint index.html",
     "lint:json": "eslint components/*.json",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:json",
     "serve": "serve ."
   },
   "devDependencies": {
