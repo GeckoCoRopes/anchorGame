@@ -16,7 +16,7 @@
       "rules": {
         "jsonc/sort-keys": "off",
         "jsonc/no-comments": "error",
-        "jsonc/no-trailing-comma": "error"
+        "jsonc/comma-dangle": "error"
       }
     }
   ]
