@@ -45,6 +45,7 @@
       { "key": ["rating", "strength", "load"], "issue": "Unrated carabiner", "text_description": "One or more carabiners in the chain are not rated for load-bearing use.", "failure": true }, 
       { "key": ["gate"], "issue": "Carabiner gate not locked", "text_description": "A carabiner in the chain has its gate unlocked or open, compromising safety.", "failure": true }
     ],
-    "min_difficulty": 3
+    "min_difficulty": 3,
+    "requires": "swivel"
   }
 ] 

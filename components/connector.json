@@ -7,6 +7,15 @@
     ]
   },
   {
+    "name": "Girth hitch",
+    "desc": "The sling is connected directly to the anchor",
+    "incompatible_with": ["Chain of Carabiners", "Welded Chain"],
+    "potential_issues": [
+      { "key": ["wear"], "issue": "The sling is abraded", "text_description": "The sling is moving directly on the hanger, and has abraded over time.", "failure": true }
+    ],
+    "min_difficulty": 2
+  },
+  {
     "name": "Snap gate carabiner",
     "desc": "A simple carabiner.",
     "potential_issues": [
@@ -25,10 +34,28 @@
     ]
   },
   {
+    "name": "Bow Shackle",
+    "desc": "U-shaped steel shackle with a removable pin.",
+    "potential_issues": [
+      { "key": ["pin"], "issue": "Pin not secured", "text_description": "The shackle pin is not properly tightened or secured.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated shackle", "text_description": "This shackle has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
+    "name": "D Shackle",
+    "desc": "D-shaped steel shackle with a removable pin.",
+    "potential_issues": [
+      { "key": ["pin"], "issue": "Pin not secured", "text_description": "The shackle pin is not properly tightened or secured.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated shackle", "text_description": "This shackle has no visible strength rating.", "failure": true }
+    ]
+  },
+  {
     "name": "Welded Ring",
     "desc": "A closed steel ring for permanent connections.",
     "potential_issues": [
-      { "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true },
+      { "key": ["weld", "damage"], "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
     ]
   },

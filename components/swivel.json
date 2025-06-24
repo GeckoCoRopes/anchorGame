@@ -2,6 +2,7 @@
   {
     "name": "Ball Bearing Swivel",
     "desc": "Prevents rope twist under load.",
+    "incompatible_with": ["anchor"],
     "potential_issues": [
       { "key": ["bearing", "corrosion", "rust"], "issue": "Bearing seized", "text_description": "The ball bearing is rusted and does not rotate.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated swivel", "text_description": "This swivel has no visible strength rating.", "failure": true }
@@ -10,6 +11,7 @@
   {
     "name": "None",
     "desc": "",
+    "incompatible_with": [],
     "potential_issues": [
       { "key": ["rotation"], "issue": "No swivel", "text_description": "Not having a swivel will transmit all rotations to the anchor. An eyebolt, particularly a screw one may fail.", "failure": true }
     ]
@@ -17,6 +19,7 @@
   {
     "name": "Integrated Swivel",
     "desc": "Built into the connector for compactness.",
+    "incompatible_with": ["anchor"],
     "potential_issues": [
       { "key": ["bearing", "damage"], "issue": "Bearing cracked", "text_description": "A crack is visible in the integrated bearing.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated swivel", "text_description": "This swivel has no visible strength rating.", "failure": true }

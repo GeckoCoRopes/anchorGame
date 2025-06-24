@@ -55,8 +55,49 @@ function generateRandomAnchor() {
   const anchor = {};
   for (const type of componentTypes) {
     const filtered = getFilteredComponents(type);
-    anchor[type] = getRandom(filtered);
+    let validComponents = filtered;
+    
+    // Check for incompatibilities with adjacent components by name
+    if (type === 'swivel' && anchor.anchor) {
+      // Swivel is incompatible with anchor
+      validComponents = filtered.filter(comp => 
+        !comp.incompatible_with || !comp.incompatible_with.includes(anchor.anchor.name)
+      );
+    } else if (type === 'top_connector' && anchor.anchor) {
+      // Top connector might be incompatible with anchor
+      validComponents = filtered.filter(comp => 
+        !comp.incompatible_with || !comp.incompatible_with.includes(anchor.anchor.name)
+      );
+    } else if (type === 'middle_connector' && anchor.swivel) {
+      // Middle connector might be incompatible with swivel
+      validComponents = filtered.filter(comp => 
+        !comp.incompatible_with || !comp.incompatible_with.includes(anchor.swivel.name)
+      );
+    } else if (type === 'sling' && anchor.top_connector) {
+      // Sling might be incompatible with top connector
+      validComponents = filtered.filter(comp => 
+        !comp.incompatible_with || !comp.incompatible_with.includes(anchor.top_connector.name)
+      );
+    } else if (type === 'bottom_connector' && anchor.ring) {
+      // Bottom connector might be incompatible with ring
+      validComponents = filtered.filter(comp => 
+        !comp.incompatible_with || !comp.incompatible_with.includes(anchor.ring.name)
+      );
+    }
+    
+    // If no valid components, fall back to all filtered components
+    if (validComponents.length === 0) {
+      validComponents = filtered;
+    }
+    
+    anchor[type] = getRandom(validComponents);
   }
+  
+  // If swivel is None, make middle_connector None too
+  if (anchor.swivel && anchor.swivel.name === 'None') {
+    anchor.middle_connector = { name: 'None', desc: '' };
+  }
+  
   return anchor;
 }
 
@@ -106,13 +147,33 @@ function getFailureCount() {
 
 function pickFailures(anchor, count) {
   // Gather all possible issues
-  const allIssues = [];
+  const requirementIssues = [];
+  const otherIssues = [];
+  
+  // First, check for requirement failures
+  for (const type of componentTypes) {
+    const comp = anchor[type];
+    if (comp && comp.requires) {
+      const requiredType = comp.requires;
+      const requiredComp = anchor[requiredType];
+      if (!requiredComp || requiredComp.name === 'None') {
+        requirementIssues.push({
+          component: type,
+          name: comp.name,
+          issue: `Missing required ${requiredType}`,
+          text: `${comp.name} requires a ${requiredType} but none is present.`
+        });
+      }
+    }
+  }
+  
+  // Then gather all other potential issues
   for (const type of componentTypes) {
     const comp = anchor[type];
     if (comp.potential_issues && comp.potential_issues.length > 0) {
       for (const issue of comp.potential_issues) {
         if (issue.failure) {
-          allIssues.push({
+          otherIssues.push({
             component: type,
             name: comp.name,
             issue: issue.issue,
@@ -122,12 +183,14 @@ function pickFailures(anchor, count) {
       }
     }
   }
-  // Shuffle and pick up to 'count' failures
-  for (let i = allIssues.length - 1; i > 0; i--) {
+  
+  // Shuffle and pick up to 'count' non-requirement failures
+  for (let i = otherIssues.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [allIssues[i], allIssues[j]] = [allIssues[j], allIssues[i]];
+    [otherIssues[i], otherIssues[j]] = [otherIssues[j], otherIssues[i]];
   }
-  return allIssues.slice(0, count);
+  // Always include all requirement issues, plus up to 'count' other issues
+  return requirementIssues.concat(otherIssues.slice(0, count));
 }
 
 let currentAnchor = null;
@@ -166,6 +229,17 @@ function setButtonsState({flyDie=true, next=false}) {
   nextBtn.style.display = next ? '' : 'none';
 }
 
+function getRequirementsSummary(anchor) {
+  let summary = '';
+  for (const type of componentTypes) {
+    const comp = anchor[type];
+    if (comp && comp.name && comp.name !== 'None' && comp.requires) {
+      summary += `\nA ${type.replace('_', ' ')} ${comp.name} requires a ${comp.requires.replace('_', ' ')}`;
+    }
+  }
+  return summary;
+}
+
 flyBtn.onclick = () => {
   if (currentFailures.length > 0) {
     let msg = '\nYou chose to FLY!\n\nYou die.\n';
@@ -177,6 +251,8 @@ flyBtn.onclick = () => {
   } else {
     anchorOutput.textContent += '\nYou chose to FLY!\n\nYou live!';
   }
+  // Show requirements summary after result
+  anchorOutput.textContent += getRequirementsSummary(currentAnchor);
   setButtonsState({flyDie: false, next: true});
 };
 
@@ -186,6 +262,8 @@ dieBtn.onclick = () => {
   } else {
     anchorOutput.textContent += '\nYou chose to DIE!\n\nBetter safe than sorry, but this was fine.';
   }
+  // Show requirements summary after result
+  anchorOutput.textContent += getRequirementsSummary(currentAnchor);
   setButtonsState({flyDie: false, next: true});
 };
 

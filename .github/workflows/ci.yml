@@ -21,5 +21,7 @@ jobs:
         run: npm run lint:js
       - name: Lint HTML
         run: npm run lint:html
+      - name: Lint JSON
+        run: npm run lint:json
       - name: Serve app (test only)
         run: npm run serve & npx wait-on http://localhost:3000 && kill $! 

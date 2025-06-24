@@ -3,6 +3,21 @@
     "browser": true,
     "es2021": true
   },
-  "extends": "eslint:recommended",
-  "rules": {}
+  "extends": [
+    "eslint:recommended",
+    "plugin:jsonc/recommended-with-jsonc"
+  ],
+  "plugins": ["jsonc"],
+  "rules": {},
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "extends": ["plugin:jsonc/recommended-with-jsonc"],
+      "rules": {
+        "jsonc/sort-keys": "off",
+        "jsonc/no-comments": "error",
+        "jsonc/no-trailing-comma": "error"
+      }
+    }
+  ]
 } 
