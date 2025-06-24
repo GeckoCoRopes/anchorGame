@@ -1,0 +1,3 @@
+import { getRandom, getDisplayName, pickFailures } from '../gameLogic.js';
+
+// ... rest of the test code remains unchanged ... 
