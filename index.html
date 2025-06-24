@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>GeckoCo Ropes - Fly or Die</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%AA%A2%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="images/Gecko_Square_BlackBG.svg">
   <style>
     html, body { height: 100%; margin: 0; padding: 0; box-sizing: border-box; overflow-x: hidden; }
     body { font-family: monospace; background: #181818; color: inherit; margin: 0; padding: 0; min-height: 100vh; }
     #anchor-container { max-width: 600px; width: 95vw; margin: 24px auto; background: #222; padding: 4vw 4vw 24px 4vw; border-radius: 8px; box-shadow: 0 2px 8px #0008; color: #fff; }
     #anchor-logo { display: block; margin: 0 auto 16px auto; max-width: 50px; width: 15vw; min-width: 40px; border-radius: 8px; height: auto; }
-    #gecko-img { display: block; margin: 0 auto 24px auto; max-width: 300px; width: 100%; height: auto; }
+    #gecko-img { display: block; margin: 0 auto; max-width: 100%; width: 100%; height: auto; }
     #anchor-output { min-height: 120px; white-space: pre-wrap; margin-bottom: 16px; color: #fff; font-size: 1em; word-break: break-word; }
     #button-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     button, #next-btn { padding: 14px 6vw; font-size: 1.1em; border-radius: 6px; border: none; background: #444; color: #fff; cursor: pointer; transition: background 0.2s; min-width: 90px; margin-bottom: 8px; }
@@ -53,11 +53,11 @@
       <span id="score-failed">Failed: 0</span>
       <span id="score-skipped">Skipped: 0</span>
     </div>
-    <div style="display: flex; align-items: flex-start;">
-      <a href="https://geckocoropes.au" target="_blank" rel="noopener">
-        <img id="anchor-logo" src="images/Gecko_Square_BlackBG.png" alt="Anchor Game Logo" style="margin:0; max-width:50px;" />
+    <div style="display: flex; align-items: flex-start; gap: 32px;">
+      <a href="https://geckocoropes.au" target="_blank" rel="noopener" style="display: flex; align-items: flex-start;">
+        <img id="anchor-logo" src="images/Gecko_Square_BlackBG.png" alt="Anchor Game Logo" style="margin:80px 0 0 0; max-width:80px; min-width:60px; width:80px; height:auto;" />
       </a>
-      <div style="flex:1; margin-left:24px;">
+      <div style="flex:1;">
         <div style="display:flex; justify-content:center; margin-bottom:12px;">
           <label for="difficulty-select" style="color:#fff; font-size:1em; margin-right:8px;">Difficulty:</label>
           <select id="difficulty-select" style="font-size:1em; padding:4px 8px; border-radius:4px; background:#222; color:#ffd600; border:1px solid #444; outline:none;">
@@ -99,20 +99,17 @@
     <div style="text-align:center; font-size:0.95em; color:#ccc; margin-top:6px;">
       Type '<code>help</code>' for instructions, '<code>hide help</code>' to hide them.
     </div>
-    <a href="https://geckocoropes.au" target="_blank" rel="noopener">
-      <img id="gecko-img" src="images/GECKO_horizontal_BlackBG.png" alt="Gecko Horizontal" title="Visit Gecko Co Ropes" />
-    </a>
-    <div style="display:flex; justify-content:center; margin-top:24px;">
-        <a href="https://ko-fi.com/geckoco" target="_blank" rel="noopener" style="display:inline-block; background:#333; color:#fff; font-weight:bold; padding:10px 28px; border-radius:6px; text-decoration:none; font-size:1.1em; box-shadow:0 2px 8px #0004; border: 1px solid #444; transition: background 0.2s, color 0.2s;">Support us on Ko-fi</a>
-      </div>
-    <div style="display:flex; justify-content:center; margin-top:18px;">
-      <a href="https://github.com/GeckoCoRopes/anchorGame/issues" target="_blank" rel="noopener" style="color:#ffd600; font-size:1em; text-decoration:underline;">Report bugs or feedback</a>
-    </div>
-    <!-- Debug toggle moved to bottom -->
-    <div style="display:flex; justify-content:center; margin-top:32px;">
-      <label style="font-size:0.98em; color:#ffd600;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 2em; margin: 36px 0 24px 0;">
+      <a href="https://ko-fi.com/geckoco" target="_blank" rel="noopener" style="display:inline-block; background:#333; color:#fff; font-weight:bold; padding:10px 28px; border-radius:6px; text-decoration:none; font-size:1.1em; box-shadow:0 2px 8px #0004; border: 1px solid #444; transition: background 0.2s, color 0.2s;">Buy us a coffee?</a>
+      <label style="font-size:0.98em; color:#ffd600; margin-bottom:0;">
         <input type="checkbox" id="debug-toggle" style="vertical-align:middle; margin-right:4px;"> Show debug info
       </label>
+      <a href="https://github.com/GeckoCoRopes/anchorGame/issues" target="_blank" rel="noopener" style="color:#ffd600; font-size:1em; text-decoration:underline;">Report bugs or feedback</a>
+    </div>
+    <div style="width:100%; margin-top:24px; margin-bottom:0;">
+      <a href="https://geckocoropes.au" target="_blank" rel="noopener">
+        <img id="gecko-img" src="images/GECKO_horizontal_BlackBG.png" alt="Gecko Horizontal" title="Visit Gecko Co Ropes" style="display:block; width:100%; max-width:100%; height:auto; margin:0 auto;" />
+      </a>
     </div>
   </div>
   <script src="game.js"></script>
