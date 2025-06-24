@@ -482,6 +482,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (difficultySelect) {
     difficultySelect.addEventListener('change', function() {
       difficulty = difficultySelect.value;
+      resetScoreboard();
       showRandomAnchor();
     });
   }
