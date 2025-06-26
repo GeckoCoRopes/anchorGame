@@ -336,6 +336,60 @@ nextBtn.onclick = () => {
   setFlyDieMode('action');
 };
 
+function handleDirectCommands(value) {
+  if (/^help$/i.test(value)) {
+    document.getElementById('anchor-instructions').style.display = '';
+    userInput.value = '';
+    return true;
+  }
+  if (/^hide help$/i.test(value)) {
+    document.getElementById('anchor-instructions').style.display = 'none';
+    userInput.value = '';
+    return true;
+  }
+  if (/^fly$/i.test(value)) {
+    flyBtn.onclick();
+    userInput.value = '';
+    return true;
+  }
+  if (/^die$/i.test(value)) {
+    dieBtn.onclick();
+    userInput.value = '';
+    return true;
+  }
+  return false;
+}
+
+function handleGeneralInspect(matchedType, comp) {
+  const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
+  let compCategoryLine = `<span style='color:#aaa;'>${getDisplayName(matchedType)}</span>`;
+  if (fail) {
+    if (difficulty === 'hard') {
+      if (Math.random() < 0.7) {
+        if (comp.desc) {
+          anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
+        } else {
+          anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
+        }
+        checkedComponents[matchedType] = 'ok';
+      } else {
+        anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
+        checkedComponents[matchedType] = 'fail';
+      }
+    } else {
+      anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
+      checkedComponents[matchedType] = 'fail';
+    }
+  } else if (comp.desc) {
+    anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
+    checkedComponents[matchedType] = 'ok';
+  } else {
+    anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
+    checkedComponents[matchedType] = 'ok';
+  }
+  renderAnchor(currentAnchor);
+}
+
 inputForm.addEventListener('submit', function(e) {
   e.preventDefault();
   // Only allow Enter to trigger Next if a result is shown
@@ -351,28 +405,8 @@ inputForm.addEventListener('submit', function(e) {
     inputHistory.push(value);
     if (inputHistory.length > 100) inputHistory.shift(); // Limit history size
     historyIndex = -1;
-    // Show instructions on 'help', hide on 'hide help'
-    if (/^help$/i.test(value)) {
-      document.getElementById('anchor-instructions').style.display = '';
-      userInput.value = '';
-      return;
-    }
-    if (/^hide help$/i.test(value)) {
-      document.getElementById('anchor-instructions').style.display = 'none';
-      userInput.value = '';
-      return;
-    }
-    // Fly/Die text commands
-    if (/^fly$/i.test(value)) {
-      flyBtn.onclick();
-      userInput.value = '';
-      return;
-    }
-    if (/^die$/i.test(value)) {
-      dieBtn.onclick();
-      userInput.value = '';
-      return;
-    }
+    // Handle direct commands (help / hide help / fly / die)
+    if (handleDirectCommands(value)) return;
     // Check for investigation synonyms, allow 'c' as shortcut
     // Now support: inspect <component> <key>
     let match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
@@ -436,43 +470,18 @@ inputForm.addEventListener('submit', function(e) {
             }
           }
         }
-        if (!keyFound) {
-          anchorOutput.textContent += `\nNo such failure present for that component.`;
+        if (keyFound) {
+          renderAnchor(currentAnchor);
+          found = true;
+        } else {
+          // Fall through to general inspect for this component
+          handleGeneralInspect(matchedType, comp);
+          found = true;
         }
-        renderAnchor(currentAnchor);
-        found = true;
       } else if (matchedType) {
         // General inspect for this component
         const comp = currentAnchor[matchedType];
-        const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
-        // Prepend the component category in a less obvious color
-        let compCategoryLine = `<span style='color:#aaa;'>${getDisplayName(matchedType)}</span>`;
-        if (fail) {
-          if (difficulty === 'hard') {
-            // 70% chance to return ok even if failed
-            if (Math.random() < 0.7) {
-              if (comp.desc) {
-                anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
-              } else {
-                anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
-              }
-              checkedComponents[matchedType] = 'ok';
-            } else {
-              anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
-              checkedComponents[matchedType] = 'fail';
-            }
-          } else {
-            anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
-            checkedComponents[matchedType] = 'fail';
-          }
-        } else if (comp.desc) {
-          anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
-          checkedComponents[matchedType] = 'ok';
-        } else {
-          anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
-          checkedComponents[matchedType] = 'ok';
-        }
-        renderAnchor(currentAnchor);
+        handleGeneralInspect(matchedType, comp);
         found = true;
       }
       if (!found) {
