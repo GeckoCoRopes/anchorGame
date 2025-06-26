@@ -1,6 +1,6 @@
 {
   "name": "anchorGame",
-  "version": "1.0.0",
+  "version": "0.1.10",
   "description": "Static anchor game app.",
   "scripts": {
     "lint:js": "eslint game.js",
