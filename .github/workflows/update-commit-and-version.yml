@@ -1,0 +1,34 @@
+name: Update Commit Hash and Version in index.html
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch if needed
+
+jobs:
+  update-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get short commit hash
+        id: vars
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Get version from package.json
+        id: version
+        run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Inject commit hash and version into index.html
+        run: |
+          sed -i 's|<div id="commit-hash"[^>]*>.*</div>|<div id="commit-hash" style="text-align:center; color:#888; font-size:0.95em; margin-top:18px;">Commit: ${{ env.SHORT_HASH }}</div>|' index.html
+          sed -i 's|<div id="version-number"[^>]*>.*</div>|<div id="version-number" style="text-align:center; color:#888; font-size:0.95em; margin-top:4px;">Version: ${{ env.VERSION }}</div>|' index.html
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: update commit hash (${{ env.SHORT_HASH }}) and version (${{ env.VERSION }})" || echo "No changes to commit"
+          git push 
