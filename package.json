@@ -16,6 +16,7 @@
     "eslint-plugin-jsonc": "^2.20.1",
     "globals": "^16.2.0",
     "htmlhint": "^1.1.4",
+    "jest": "^30.0.3",
     "serve": "^14.0.1"
   }
 }
