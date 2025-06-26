@@ -25,9 +25,9 @@ let flyDieMode = 'action'; // 'action' or 'next'
 
 const displayNames = {
   anchor: 'Anchor',
-  top_connector: 'Anchor Crab',
-  middle_connector: 'Swivel Crab',
-  bottom_connector: 'Ring Crab',
+  top_connector: 'AnchorCrab',
+  middle_connector: 'SwivelCrab',
+  bottom_connector: 'RingCrab',
   sling: 'Sling',
   swivel: 'Swivel',
   ring: 'Ring'
