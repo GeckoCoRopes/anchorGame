@@ -207,7 +207,6 @@ let currentFailures = [];
 
 // Input history for cycling with up arrow
 let inputHistory = [];
-// eslint-disable-next-line no-unused-vars
 let historyIndex = -1;
 
 function showRandomAnchor() {
@@ -261,8 +260,14 @@ function resetScoreboard() {
 function setNextButtonText() {
   if (!resultShown) {
     nextBtn.textContent = 'Skip';
+    nextBtn.style.background = '#222';
+    nextBtn.style.color = '#aaa';
+    nextBtn.style.opacity = '0.7';
   } else {
     nextBtn.textContent = 'Next';
+    nextBtn.style.background = '#444';
+    nextBtn.style.color = '#fff';
+    nextBtn.style.opacity = '1';
   }
 }
 
@@ -461,6 +466,29 @@ inputForm.addEventListener('submit', function(e) {
       }
     }
     userInput.value = '';
+  }
+});
+
+userInput.addEventListener('keydown', function(e) {
+  if (inputHistory.length === 0) return;
+  if (e.key === 'ArrowUp') {
+    if (historyIndex === -1) {
+      historyIndex = inputHistory.length - 1;
+    } else if (historyIndex > 0) {
+      historyIndex--;
+    }
+    userInput.value = inputHistory[historyIndex] || '';
+    e.preventDefault();
+  } else if (e.key === 'ArrowDown') {
+    if (historyIndex === -1) return;
+    if (historyIndex < inputHistory.length - 1) {
+      historyIndex++;
+      userInput.value = inputHistory[historyIndex] || '';
+    } else {
+      historyIndex = -1;
+      userInput.value = '';
+    }
+    e.preventDefault();
   }
 });
 
