@@ -25,9 +25,9 @@ let flyDieMode = 'action'; // 'action' or 'next'
 
 const displayNames = {
   anchor: 'Anchor',
-  top_connector: 'Anchor Crab',
-  middle_connector: 'Swivel Crab',
-  bottom_connector: 'Ring Crab',
+  top_connector: 'AnchorCrab',
+  middle_connector: 'SwivelCrab',
+  bottom_connector: 'RingCrab',
   sling: 'Sling',
   swivel: 'Swivel',
   ring: 'Ring'
@@ -207,7 +207,6 @@ let currentFailures = [];
 
 // Input history for cycling with up arrow
 let inputHistory = [];
-// eslint-disable-next-line no-unused-vars
 let historyIndex = -1;
 
 function showRandomAnchor() {
@@ -261,8 +260,14 @@ function resetScoreboard() {
 function setNextButtonText() {
   if (!resultShown) {
     nextBtn.textContent = 'Skip';
+    nextBtn.style.background = '#222';
+    nextBtn.style.color = '#aaa';
+    nextBtn.style.opacity = '0.7';
   } else {
     nextBtn.textContent = 'Next';
+    nextBtn.style.background = '#444';
+    nextBtn.style.color = '#fff';
+    nextBtn.style.opacity = '1';
   }
 }
 
@@ -331,6 +336,60 @@ nextBtn.onclick = () => {
   setFlyDieMode('action');
 };
 
+function handleDirectCommands(value) {
+  if (/^help$/i.test(value)) {
+    document.getElementById('anchor-instructions').style.display = '';
+    userInput.value = '';
+    return true;
+  }
+  if (/^hide help$/i.test(value)) {
+    document.getElementById('anchor-instructions').style.display = 'none';
+    userInput.value = '';
+    return true;
+  }
+  if (/^fly$/i.test(value)) {
+    flyBtn.onclick();
+    userInput.value = '';
+    return true;
+  }
+  if (/^die$/i.test(value)) {
+    dieBtn.onclick();
+    userInput.value = '';
+    return true;
+  }
+  return false;
+}
+
+function handleGeneralInspect(matchedType, comp) {
+  const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
+  let compCategoryLine = `<span style='color:#aaa;'>${getDisplayName(matchedType)}</span>`;
+  if (fail) {
+    if (difficulty === 'hard') {
+      if (Math.random() < 0.7) {
+        if (comp.desc) {
+          anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
+        } else {
+          anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
+        }
+        checkedComponents[matchedType] = 'ok';
+      } else {
+        anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
+        checkedComponents[matchedType] = 'fail';
+      }
+    } else {
+      anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
+      checkedComponents[matchedType] = 'fail';
+    }
+  } else if (comp.desc) {
+    anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
+    checkedComponents[matchedType] = 'ok';
+  } else {
+    anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
+    checkedComponents[matchedType] = 'ok';
+  }
+  renderAnchor(currentAnchor);
+}
+
 inputForm.addEventListener('submit', function(e) {
   e.preventDefault();
   // Only allow Enter to trigger Next if a result is shown
@@ -346,28 +405,8 @@ inputForm.addEventListener('submit', function(e) {
     inputHistory.push(value);
     if (inputHistory.length > 100) inputHistory.shift(); // Limit history size
     historyIndex = -1;
-    // Show instructions on 'help', hide on 'hide help'
-    if (/^help$/i.test(value)) {
-      document.getElementById('anchor-instructions').style.display = '';
-      userInput.value = '';
-      return;
-    }
-    if (/^hide help$/i.test(value)) {
-      document.getElementById('anchor-instructions').style.display = 'none';
-      userInput.value = '';
-      return;
-    }
-    // Fly/Die text commands
-    if (/^fly$/i.test(value)) {
-      flyBtn.onclick();
-      userInput.value = '';
-      return;
-    }
-    if (/^die$/i.test(value)) {
-      dieBtn.onclick();
-      userInput.value = '';
-      return;
-    }
+    // Handle direct commands (help / hide help / fly / die)
+    if (handleDirectCommands(value)) return;
     // Check for investigation synonyms, allow 'c' as shortcut
     // Now support: inspect <component> <key>
     let match = value.match(/^(investigate|check|inspect|examine|look at|c)\s+(.+)$/i);
@@ -393,10 +432,16 @@ inputForm.addEventListener('submit', function(e) {
         const numberAlias = (i + 1).toString();
         if (
           componentQuery === typeLabel ||
-          componentQuery === comp.name.toLowerCase() ||
           (displayLabel && componentQuery === displayLabel) ||
           componentQuery === numberAlias ||
-          typeLabel.includes(componentQuery) ||
+          typeLabel.includes(componentQuery)
+        ) {
+          matchedType = type;
+          break;
+        }
+        // If no typeLabel match, try to match on comp.name
+        if (
+          componentQuery === comp.name.toLowerCase() ||
           comp.name.toLowerCase().includes(componentQuery)
         ) {
           matchedType = type;
@@ -407,53 +452,42 @@ inputForm.addEventListener('submit', function(e) {
       if (matchedType && keyQuery) {
         const comp = currentAnchor[matchedType];
         let keyFound = false;
-        if (comp && comp.potential_issues) {
-          for (const issue of comp.potential_issues) {
-            if (issue.failure && issue.key) {
-              const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
-              if (keys.includes(keyQuery)) {
-                anchorOutput.textContent += `\n[${getDisplayName(matchedType)}: ${comp.name}] ${issue.text_description}`;
-                checkedComponents[matchedType] = 'fail';
-                keyFound = true;
+        // Look for a matching failure in currentFailures
+        for (const fail of currentFailures) {
+          if (fail.component === matchedType && fail.name === comp.name) {
+            // Find the matching key in the component's potential_issues
+            if (comp && comp.potential_issues) {
+              for (const issue of comp.potential_issues) {
+                if (issue.failure && issue.key) {
+                  const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
+                  if (keys.includes(keyQuery)) {
+                    // Only show if this is the actual failure for this round
+                    if (
+                      (fail.issue && issue.issue && fail.issue === issue.issue) ||
+                      (fail.text && issue.text_description && fail.text === issue.text_description)
+                    ) {
+                      anchorOutput.textContent += `\n[${getDisplayName(matchedType)}: ${comp.name}] ${issue.text_description}`;
+                      checkedComponents[matchedType] = 'fail';
+                      keyFound = true;
+                    }
+                  }
+                }
               }
             }
           }
         }
-        if (!keyFound) {
-          anchorOutput.textContent += `\nNo such failure key for that component to investigate.`;
+        if (keyFound) {
+          renderAnchor(currentAnchor);
+          found = true;
+        } else {
+          // Fall through to general inspect for this component
+          handleGeneralInspect(matchedType, comp);
+          found = true;
         }
-        renderAnchor(currentAnchor);
-        found = true;
       } else if (matchedType) {
         // General inspect for this component
         const comp = currentAnchor[matchedType];
-        const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
-        if (fail) {
-          if (difficulty === 'hard') {
-            // 70% chance to return ok even if failed
-            if (Math.random() < 0.7) {
-              if (comp.desc) {
-                anchorOutput.textContent += `\n${comp.desc}`;
-              } else {
-                anchorOutput.textContent += `\nNo further information.`;
-              }
-              checkedComponents[matchedType] = 'ok';
-            } else {
-              anchorOutput.textContent += `\n${fail.text}`;
-              checkedComponents[matchedType] = 'fail';
-            }
-          } else {
-            anchorOutput.textContent += `\n${fail.text}`;
-            checkedComponents[matchedType] = 'fail';
-          }
-        } else if (comp.desc) {
-          anchorOutput.textContent += `\n${comp.desc}`;
-          checkedComponents[matchedType] = 'ok';
-        } else {
-          anchorOutput.textContent += `\nNo further information.`;
-          checkedComponents[matchedType] = 'ok';
-        }
-        renderAnchor(currentAnchor);
+        handleGeneralInspect(matchedType, comp);
         found = true;
       }
       if (!found) {
@@ -461,6 +495,29 @@ inputForm.addEventListener('submit', function(e) {
       }
     }
     userInput.value = '';
+  }
+});
+
+userInput.addEventListener('keydown', function(e) {
+  if (inputHistory.length === 0) return;
+  if (e.key === 'ArrowUp') {
+    if (historyIndex === -1) {
+      historyIndex = inputHistory.length - 1;
+    } else if (historyIndex > 0) {
+      historyIndex--;
+    }
+    userInput.value = inputHistory[historyIndex] || '';
+    e.preventDefault();
+  } else if (e.key === 'ArrowDown') {
+    if (historyIndex === -1) return;
+    if (historyIndex < inputHistory.length - 1) {
+      historyIndex++;
+      userInput.value = inputHistory[historyIndex] || '';
+    } else {
+      historyIndex = -1;
+      userInput.value = '';
+    }
+    e.preventDefault();
   }
 });
 
