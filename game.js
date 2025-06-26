@@ -432,10 +432,16 @@ inputForm.addEventListener('submit', function(e) {
         const numberAlias = (i + 1).toString();
         if (
           componentQuery === typeLabel ||
-          componentQuery === comp.name.toLowerCase() ||
           (displayLabel && componentQuery === displayLabel) ||
           componentQuery === numberAlias ||
-          typeLabel.includes(componentQuery) ||
+          typeLabel.includes(componentQuery)
+        ) {
+          matchedType = type;
+          break;
+        }
+        // If no typeLabel match, try to match on comp.name
+        if (
+          componentQuery === comp.name.toLowerCase() ||
           comp.name.toLowerCase().includes(componentQuery)
         ) {
           matchedType = type;
