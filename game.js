@@ -412,20 +412,32 @@ inputForm.addEventListener('submit', function(e) {
       if (matchedType && keyQuery) {
         const comp = currentAnchor[matchedType];
         let keyFound = false;
-        if (comp && comp.potential_issues) {
-          for (const issue of comp.potential_issues) {
-            if (issue.failure && issue.key) {
-              const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
-              if (keys.includes(keyQuery)) {
-                anchorOutput.textContent += `\n[${getDisplayName(matchedType)}: ${comp.name}] ${issue.text_description}`;
-                checkedComponents[matchedType] = 'fail';
-                keyFound = true;
+        // Look for a matching failure in currentFailures
+        for (const fail of currentFailures) {
+          if (fail.component === matchedType && fail.name === comp.name) {
+            // Find the matching key in the component's potential_issues
+            if (comp && comp.potential_issues) {
+              for (const issue of comp.potential_issues) {
+                if (issue.failure && issue.key) {
+                  const keys = Array.isArray(issue.key) ? issue.key.map(k => k.toLowerCase()) : [issue.key.toLowerCase()];
+                  if (keys.includes(keyQuery)) {
+                    // Only show if this is the actual failure for this round
+                    if (
+                      (fail.issue && issue.issue && fail.issue === issue.issue) ||
+                      (fail.text && issue.text_description && fail.text === issue.text_description)
+                    ) {
+                      anchorOutput.textContent += `\n[${getDisplayName(matchedType)}: ${comp.name}] ${issue.text_description}`;
+                      checkedComponents[matchedType] = 'fail';
+                      keyFound = true;
+                    }
+                  }
+                }
               }
             }
           }
         }
         if (!keyFound) {
-          anchorOutput.textContent += `\nNo such failure key for that component to investigate.`;
+          anchorOutput.textContent += `\nNo such failure present for that component.`;
         }
         renderAnchor(currentAnchor);
         found = true;
@@ -433,29 +445,31 @@ inputForm.addEventListener('submit', function(e) {
         // General inspect for this component
         const comp = currentAnchor[matchedType];
         const fail = currentFailures.find(f => f.component === matchedType && f.name === comp.name);
+        // Prepend the component category in a less obvious color
+        let compCategoryLine = `<span style='color:#aaa;'>${getDisplayName(matchedType)}</span>`;
         if (fail) {
           if (difficulty === 'hard') {
             // 70% chance to return ok even if failed
             if (Math.random() < 0.7) {
               if (comp.desc) {
-                anchorOutput.textContent += `\n${comp.desc}`;
+                anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
               } else {
-                anchorOutput.textContent += `\nNo further information.`;
+                anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
               }
               checkedComponents[matchedType] = 'ok';
             } else {
-              anchorOutput.textContent += `\n${fail.text}`;
+              anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
               checkedComponents[matchedType] = 'fail';
             }
           } else {
-            anchorOutput.textContent += `\n${fail.text}`;
+            anchorOutput.innerHTML += `\n${compCategoryLine} - ${fail.text}`;
             checkedComponents[matchedType] = 'fail';
           }
         } else if (comp.desc) {
-          anchorOutput.textContent += `\n${comp.desc}`;
+          anchorOutput.innerHTML += `\n${compCategoryLine} - ${comp.desc}`;
           checkedComponents[matchedType] = 'ok';
         } else {
-          anchorOutput.textContent += `\nNo further information.`;
+          anchorOutput.innerHTML += `\n${compCategoryLine} - No further information.`;
           checkedComponents[matchedType] = 'ok';
         }
         renderAnchor(currentAnchor);
