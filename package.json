@@ -7,7 +7,8 @@
     "lint:html": "htmlhint index.html",
     "lint:json": "eslint components/*.json",
     "lint": "npm run lint:js && npm run lint:html && npm run lint:json",
-    "serve": "serve ."
+    "serve": "serve .",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -17,5 +18,10 @@
     "globals": "^16.2.0",
     "htmlhint": "^1.1.4",
     "serve": "^14.0.1"
-  }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
+  "type": "module"
 }

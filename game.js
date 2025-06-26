@@ -1,3 +1,11 @@
+import {
+  componentTypes,
+  displayNames,
+  getDisplayName,
+  getRandom,
+  getFailureCount,
+} from './utils.js';
+
 const anchorOutput = document.getElementById('anchor-output');
 const flyBtn = document.getElementById('fly-btn');
 const dieBtn = document.getElementById('die-btn');
@@ -7,15 +15,6 @@ const nextBtn = document.getElementById('next-btn');
 // eslint-disable-next-line no-unused-vars
 const difficultySelect = document.getElementById('difficulty-select');
 
-const componentTypes = [
-  'anchor',
-  'top_connector',
-  'sling',
-  'middle_connector',
-  'swivel',
-  'bottom_connector',
-  'ring'
-];
 
 let components = {};
 let checkedComponents = {};
@@ -23,19 +22,6 @@ let difficulty = 'medium';
 let resultShown = false;
 let flyDieMode = 'action'; // 'action' or 'next'
 
-const displayNames = {
-  anchor: 'Anchor',
-  top_connector: 'AnchorCrab',
-  middle_connector: 'SwivelCrab',
-  bottom_connector: 'RingCrab',
-  sling: 'Sling',
-  swivel: 'Swivel',
-  ring: 'Ring'
-};
-
-function getDisplayName(type) {
-  return displayNames[type] || type.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
-}
 
 // Load all component configs
 async function loadComponents() {
@@ -52,9 +38,6 @@ async function loadComponents() {
   }
 }
 
-function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 function getDifficultyLevel() {
   if (difficulty === 'easy') return 1;
@@ -141,17 +124,6 @@ function renderAnchor(anchor) {
       ul.appendChild(li);
     }
   }
-}
-
-function getFailureCount() {
-  // 50% chance of any failure
-  if (Math.random() >= 0.5) return 0;
-  // If there is a failure, determine how many
-  const r = Math.random();
-  if (r < 0.05) return 4;
-  if (r < 0.15) return 3;
-  if (r < 0.35) return 2;
-  return 1;
 }
 
 function pickFailures(anchor, count) {
