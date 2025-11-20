@@ -12,6 +12,7 @@ const focusParam = params.get('component');
 
 const typeToFile = {
   anchor: 'anchor',
+  connector: 'connector',
   top_connector: 'connector',
   middle_connector: 'connector',
   sling: 'sling',
