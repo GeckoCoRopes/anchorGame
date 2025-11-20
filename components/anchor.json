@@ -32,6 +32,16 @@
     "requires": "swivel"
   }, 
   { 
+    "name": "Plate hanger - 2 dynabolts", 
+    "desc": "A permanent, solid anchor in hard surfaces.",
+    "long_desc": "A solid industrial anchor: a suitable plate with a fixed eye, secured with a pair of dynabolts.\n\nProvided that the plate is adequate, the pair of dynabolts provides redundancy. They aren't cheap, nor light, but they're typically solid.",
+    "potential_issues": [
+      { "key": ["moving", "loose"], "issue": "The bolt is loose!", "text_description": "The bolt is moving. It may fail at any time.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }, 
+  { 
     "name": "Glue-In Eye", 
     "desc": "A permanent, high-strength glue-in anchor.",
     "long_desc": "Glue-ins distribute load across a long bonded shaft, making them some of the strongest anchors when installed correctly. They require professional installation, careful mixing of resin, and immaculate rock or concrete. Even though they look bomber, inspect for spinning, discoloration, voids around the glue, and mismatched hardware before trusting life to them.",

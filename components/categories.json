@@ -19,15 +19,16 @@
     "inspection_tips": [
       "Confirm every gate or sleeve is locked and cannot vibrate open.",
       "Inspect for grooves, burrs, or corrosion that could damage nearby slings or ropes.",
-      "Check that connectors are not cross-loaded, tri-axially loaded, or forced against each other."
+      "Check that connectors are not cross-loaded, tri-axially loaded, or forced against each other.",
+      "Permanent installations should be easy to inspect from the ground - use shackles with visible mousing."
     ],
-    "usage_notes": "Standardize on captive-bar or steel hardware for fixed installs, and swap connectors that show even minor deformation or mystery history."
+    "usage_notes": "Connectors should be chosen carefully to minimise the risks. For personal use, aluminium screwgates and 16mm nylon slings are suitable. For permanent installations, or where abrasion is a concern. Stainless steel connectors, maillons or shackles are most suitable."
   },
   {
     "type": "sling",
     "title": "Slings",
     "short_desc": "Soft goods or chains that extend the system and equalize loads.",
-    "long_desc": "Slings transfer load from the top connector down toward the working end. They may be sewn nylon, Dyneema, chain, or improvised webbing. Because they are flexible links, they are vulnerable to abrasion, UV damage, and twists that create shock-loading.",
+    "long_desc": "Slings transfer load from the top connector down toward the ring. They may be sewn nylon, Dyneema, chain, or webbing. Because they are flexible links, they are vulnerable to abrasion, UV damage, and twists that accelerate wear.",
     "inspection_tips": [
       "Feel for soft spots, cuts, or stiffened sections.",
       "Check tags or color-coding for strength ratings and retirement criteria.",
@@ -38,12 +39,13 @@
   {
     "type": "swivel",
     "title": "Swivels",
-    "short_desc": "Allow the load to rotate without twisting ropes or slings.",
-    "long_desc": "Swivels prevent rope twist and help riders rotate freely. They add moving parts to the system, which demands extra inspection. Some scenarios intentionally omit swivels to reduce complexity; others require them to avoid spin-up.",
+    "short_desc": "A swivel allows the load to rotate without twisting the rigging.",
+    "long_desc": "Swivels prevent rope twist and allow the load to rotate freely. A swivel is necessarily a single point of failure, so it must be selected and inspected carefully. Using a swivel will reduce the risks associated with some anchors, but these are better avoided by using suitable anchors.",
     "inspection_tips": [
       "Spin the swivel to feel for grit, notchiness, or uneven resistance.",
       "Verify the manufacturer’s rating is legible and appropriate.",
-      "Check that attached hardware cannot torque against the swivel body."
+      "Check that attached hardware cannot torque against the swivel body.",
+      "Check for damage or wear to the swivel connections. "
     ],
     "usage_notes": "If a swivel feels rough or has play in the bearings, pull it from service immediately."
   },
@@ -51,11 +53,13 @@
     "type": "ring",
     "title": "Rings & Plates",
     "short_desc": "Final hard points that the rope actually runs through.",
-    "long_desc": "Rings, quick-links, or other rounded hardware act as the final directional for the rope. They must be perfectly smooth because any imperfection will damage ropes quickly. Since they see constant friction, they are usually the fastest-wearing metal in the system.",
+    "long_desc": "Rings or plates act as the final part of our system, allowing the attachment of several uplines, either directly, or using carabiners. They must be strong in any orientation as they are subjected to variable loading. Any ring or plate that has the rope pass through or over it directly must be smooth and free from damage",
     "inspection_tips": [
       "Run a cloth through the ring to detect hidden burrs.",
       "Look for flat spots, discoloration from overheating, or sharp lips.",
-      "Confirm sizing matches the rope diameter to avoid pinching."
+      "Confirm sizing matches the rope diameter to avoid pinching.",
+      "Ensure they are rated and fit for purpose",
+      "Know the material and suitability - Cast rings are not suitable."
     ],
     "usage_notes": "Flip or replace rings proactively; never leave a deeply grooved ring in service."
   }
