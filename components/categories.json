@@ -12,16 +12,16 @@
     "usage_notes": "Always back up improvised anchors and demand documented ratings for permanent fixtures."
   },
   {
-    "type": "top_connector",
-    "title": "Top Connectors",
-    "short_desc": "Hardware that links the anchor into the rest of the system.",
-    "long_desc": "Top connectors are usually carabiners, quick-links, or specialized plates that attach directly to the anchor. Because they bridge the anchor and the remainder of the rig, they must be oriented correctly and locked. This position frequently sees tri-axial loading or lever forces.",
+    "type": "connector",
+    "title": "Connectors",
+    "short_desc": "Carabiners, maillons, and links that tie every stage of the system together.",
+    "long_desc": "Whether they live at the anchor, between a swivel, or directly above the ring, connectors all perform the same job: translate load from one component into the next. Because they can see odd tri-axial forces and crowding, each connector must be oriented, locked, and inspected with the same care regardless of where it sits in the stack.",
     "inspection_tips": [
-      "Confirm gates are locked and not cross-loaded.",
-      "Inspect for burrs or grooves that could cut into slings.",
-      "Ensure compatibility with whatever hardware the anchor provides."
+      "Confirm every gate or sleeve is locked and cannot vibrate open.",
+      "Inspect for grooves, burrs, or corrosion that could damage nearby slings or ropes.",
+      "Check that connectors are not cross-loaded, tri-axially loaded, or forced against each other."
     ],
-    "usage_notes": "Use steel connectors for fixed installations; aluminum hardware can groove over time."
+    "usage_notes": "Standardize on captive-bar or steel hardware for fixed installs, and swap connectors that show even minor deformation or mystery history."
   },
   {
     "type": "sling",
@@ -36,18 +36,6 @@
     "usage_notes": "Retire slings that show unknown history or any core exposure."
   },
   {
-    "type": "middle_connector",
-    "title": "Middle Connectors",
-    "short_desc": "Interfaces between slings and swivels, often taking twisting loads.",
-    "long_desc": "Middle connectors keep the system modular, letting slings interface with swivels or other hardware. They experience multi-directional loading and tend to get crowded with metal-on-metal contact if the build is messy.",
-    "inspection_tips": [
-      "Look for misaligned gates or tri-axial loading.",
-      "Ensure sufficient space so hardware doesn’t bind when loaded.",
-      "Confirm every gate is locked and oriented away from abrasive surfaces."
-    ],
-    "usage_notes": "Consider captive bar carabiners or quick-links to maintain orientation."
-  },
-  {
     "type": "swivel",
     "title": "Swivels",
     "short_desc": "Allow the load to rotate without twisting ropes or slings.",
@@ -58,19 +46,6 @@
       "Check that attached hardware cannot torque against the swivel body."
     ],
     "usage_notes": "If a swivel feels rough or has play in the bearings, pull it from service immediately."
-  },
-  {
-    "type": "bottom_connector",
-    "title": "Bottom Connectors",
-    "short_desc": "Hardware linking swivels to the final lowering ring.",
-    "long_desc": "Bottom connectors often see the most abuse because they sit near riders and rope movement. They must resist side loading, gate flutter, and rope wear. This is also the junction where repeated cycles can loosen screw sleeves.",
-    "inspection_tips": [
-      "Verify screw sleeves are tight and backed up.",
-      "Check for rope grooves, sharp edges, or burrs.",
-      "Ensure orientation keeps the gate away from rubbing ropes."
-    ],
-    "usage_notes": "Replace connectors that show more than superficial grooving or any deformation."
-  },
   {
     "type": "ring",
     "title": "Lowering Rings",

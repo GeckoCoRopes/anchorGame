@@ -20,6 +20,17 @@ const typeToFile = {
   ring: 'ring',
 };
 
+const canonicalTypeMap = {
+  connector: 'connector',
+  top_connector: 'connector',
+  middle_connector: 'connector',
+  bottom_connector: 'connector',
+};
+
+function getCanonicalType(type) {
+  return canonicalTypeMap[type] || type;
+}
+
 function slugify(value) {
   return value
     .toLowerCase()
@@ -221,16 +232,17 @@ function renderCategoryNav(categories, activeType) {
   });
 }
 
-async function loadCategory(type) {
+async function loadCategory(type, canonicalType) {
   const res = await fetch('components/categories.json');
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText}`);
   }
   const categories = await res.json();
-  renderCategoryNav(categories, type);
-  const match = categories.find((item) => item.type === type);
+  const activeType = canonicalType || type;
+  renderCategoryNav(categories, activeType);
+  const match = categories.find((item) => item.type === activeType);
   if (!match) {
-    throw new Error(`Unknown category '${type}'`);
+    throw new Error(`Unknown category '${activeType}'`);
   }
   renderCategoryDetails(match);
   return match;
@@ -268,8 +280,9 @@ async function init() {
     showError('Select a category from the wiki index.');
     return;
   }
+  const canonicalType = getCanonicalType(typeParam);
   try {
-    await loadCategory(typeParam);
+    await loadCategory(typeParam, canonicalType);
     await loadComponents(typeParam);
     if (focusParam) {
       focusComponent(focusParam);

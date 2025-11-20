@@ -23,8 +23,15 @@ function slugifyName(value) {
     .replace(/^-+|-+$/g, '');
 }
 
+const wikiTypeAliases = {
+  top_connector: 'connector',
+  middle_connector: 'connector',
+  bottom_connector: 'connector',
+};
+
 function getWikiHref(type, name) {
-  const params = new URLSearchParams({ type });
+  const canonicalType = wikiTypeAliases[type] || type;
+  const params = new URLSearchParams({ type: canonicalType });
   if (name) {
     params.set('component', slugifyName(name));
   }

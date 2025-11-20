@@ -37,7 +37,7 @@ Anchor Game is a web-based interactive simulation where you are presented with a
 
 - Visit [`wiki.html`](https://geckocoropes.github.io/anchorGame/wiki.html) for a browsable reference of every component plus their failure modes.
 - The wiki reads directly from the same JSON files—updating `components/*.json` instantly updates the wiki on the next deploy.
-- Each category has its own deep-dive page (e.g., [`wiki-category.html?type=anchor`](https://geckocoropes.github.io/anchorGame/wiki-category.html?type=anchor)) that explains inspection tips and pulls in the relevant components.
+- Each category has its own deep-dive page (e.g., [`wiki-category.html?type=anchor`](https://geckocoropes.github.io/anchorGame/wiki-category.html?type=anchor)) that explains inspection tips and pulls in the relevant components. Connectors now share a single page (`?type=connector`) because the same hardware can appear at the top, middle, or bottom of the stack.
 - Drop photos into `images/components/<type>/` using the slugified component name (e.g., `images/components/sling/dyneema-sling.jpg`). Supported formats: `.webp`, `.png`, `.jpg`, `.jpeg`, `.svg`.
 - If no matching photo exists the wiki shows a placeholder reminding you where to add one.
 - While playing, click any component name under “The anchor consists of” to jump straight to its category page (opens in a new tab).
