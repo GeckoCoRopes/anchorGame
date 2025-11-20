@@ -2,6 +2,7 @@
   {
     "name": "Dyneema Sling",
     "desc": "Ultra-light and abrasion resistant.",
+    "long_desc": "Dyneema wins when every gram matters, but it melts at a lower temperature and handles poorly around knots. It is slick, so knots can creep under cyclical load, and it hides UV damage behind bright sheaths. Limit it to padded, redundant anchors and retire it at the first hint of fuzz or glazing.",
     "potential_issues": [
       { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The dyneema sling shows signs of abrasion from repeated use.", "failure": true },
       { "key": ["uv", "sun", "faded"], "issue": "UV damage", "text_description": "The sling is faded and weakened from sun exposure.", "failure": true },
@@ -11,6 +12,7 @@
   {
     "name": "Nylon Webbing",
     "desc": "Classic, stretchy, and durable.",
+    "long_desc": "Tubular nylon is the old standby for rigging because it stretches to absorb shock and is cheap to replace. The downside is that it soaks up water, dirt, and UV easily. Cycle tags religiously, keep it away from chemicals, and avoid using it over sharp edges without ample padding.",
     "potential_issues": [
       { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The nylon webbing is frayed and worn.", "failure": true },
       { "key": ["age", "uv", "damage"], "issue": "Age", "text_description": "The nylon webbing is faded and appears to be quite old.", "failure": true },
@@ -20,6 +22,7 @@
   {
     "name": "Round sling",
     "desc": "Strong, heavy and durable.",
+    "long_desc": "Industrial round slings or spansets wrap a protective sleeve around load-bearing fibers, giving them excellent strength and redundancy. Once the sleeve cuts, however, grit rushes in and damages the core unseen. Feel along the entire length for lumps, inspect the tag, and rotate the sling so one spot does not carry every session.",
     "potential_issues": [
       { "key": ["wear", "abrasion"], "issue": "Abrasion", "text_description": "The round sling is frayed and worn.", "failure": true },
       { "key": ["age", "uv", "damage"], "issue": "Age", "text_description": "The round sling is faded and appears to be quite old.", "failure": true },
@@ -29,6 +32,7 @@
   {
     "name": "Welded Chain",
     "desc": "Welded steel chain for maximum durability.",
+    "long_desc": "Chains handle hot, abrasive environments that would shred textiles, making them popular for permanent installs. They are heavy and can notch softer connectors, so isolate them with steel hardware and add protection where they contact beams. Any bent or misshapen link is a retirement event.",
     "potential_issues": [
       { "key": ["corrosion", "rust"], "issue": "Corrosion", "text_description": "The chain sling is rusted and weakened.", "failure": true },
       { "key": ["damage", "bent"], "issue": "Bent link", "text_description": "A link in the chain is visibly bent.", "failure": true },
@@ -39,6 +43,7 @@
   {
     "name": "Chain of Carabiners",
     "desc": "A linked chain of (screwgate) carabiners.",
+    "long_desc": "Linking multiple screwgate carabiners mimics a chain while keeping things modular. Each link can rotate and unlock, making regular inspections non-negotiable. Equalize the load so no single biner sees cross-loads, keep every gate locked, and remember that mixing metals will accelerate corrosion in outdoor rigs.",
     "potential_issues": [
       { "key": ["corrosion", "rust"], "issue": "Carabiner corrosion", "text_description": "One or more carabiners in the chain are rusted and weakened.", "failure": true },
       { "key": ["damage", "bent"], "issue": "Bent carabiner", "text_description": "A carabiner in the chain is visibly bent or deformed.", "failure": true },

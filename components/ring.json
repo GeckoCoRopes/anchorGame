@@ -2,6 +2,7 @@
   {
     "name": "Welded Steel Ring",
     "desc": "Solid, round, and durable.",
+    "long_desc": "These heavy rings are the workhorses of aerial rigs and rappel stations. They tolerate heat from lowering and can take abuse, but once corrosion starts the degradation accelerates quickly. Feel for flat spots from heavy use and retire any ring that shows orange rust or rough welds.",
     "potential_issues": [
       { "key": ["wear", "corrosion", "rust"], "issue": "Corrosion", "text_description": "The steel ring is rusted and weakened.", "failure": true },
       { "key": ["damage", "sharp"], "issue": "Sharp edges", "text_description": "The steel ring has sharp edges on welds, or other damage.", "failure": true },
@@ -11,6 +12,7 @@
   {
     "name": "Wooden Gymnast Ring",
     "desc": "Lightweight 25mm timber ring.",
+    "long_desc": "Timber rings feel friendly on the hands and are popular in circus crossovers, yet they hate moisture and sharp connectors. The grain raises splinters as humidity swings and ropes can chew grooves into them. Store them indoors, sand and seal damaged edges, and swap to metal for high-speed descents.",
     "potential_issues": [
       { "key": ["wear", "damage", "abrasion"], "issue": "Abrasion", "text_description": "The wooden ring shows significant wear from rope movement.", "failure": true },
       { "key": ["wear", "damage", "abrasion"], "issue": "Raised splinters", "text_description": "The wooden ring shows splinters that may damage your ropes or slings.", "failure": true },
@@ -22,6 +24,7 @@
   {
     "name": "CNC Aluminum Ring",
     "desc": "Lightweight and corrosion resistant.",
+    "long_desc": "Machined aluminum rings keep weight low while offering silky rope travel. They spread friction across a broad surface, but the soft alloy can groove rapidly if paired with dirty ropes. Inspect for burrs, keep them paired with compatible carabiners, and never let them see steel-on-aluminum grinding.",
     "potential_issues": [
       { "key": ["wear", "damage", "abrasion"], "issue": "Abrasion", "text_description": "The aluminum ring shows significant wear from rope movement.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }
@@ -31,6 +34,7 @@
   {
     "name": "Titanium Ring",
     "desc": "Premium, ultra-light option.",
+    "long_desc": "Titanium rings are boutique hardware meant for those chasing the strongest, lightest toolkit. They shrug off corrosion but hide cracks well, so magnify them in sunlight and look for discoloration around welds. Follow manufacturer retirement cycles strictly because field repairs are impossible.",
     "potential_issues": [
       { "key": ["crack", "damage", "wear"], "issue": "Crack detected", "text_description": "A hairline crack is visible in the titanium ring.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated ring", "text_description": "This ring has no visible strength rating.", "failure": true }

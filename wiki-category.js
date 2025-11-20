@@ -121,6 +121,13 @@ function createCard(type, component) {
     body.appendChild(desc);
   }
 
+  if (component.long_desc) {
+    const longDesc = document.createElement('p');
+    longDesc.className = 'component-card__long';
+    longDesc.textContent = component.long_desc;
+    body.appendChild(longDesc);
+  }
+
   const meta = document.createElement('div');
   meta.className = 'meta-row';
   const difficultyTag = formatDifficulty(component.min_difficulty);
