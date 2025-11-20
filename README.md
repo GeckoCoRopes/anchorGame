@@ -33,6 +33,13 @@ Anchor Game is a web-based interactive simulation where you are presented with a
 - You can add, remove, or edit components and their possible failure modes by editing these files.
 - All connectors (top, middle, bottom) use the shared `connector.json` config.
 
+### Component Wiki
+
+- Visit [`wiki.html`](https://geckocoropes.github.io/anchorGame/wiki.html) for a browsable reference of every component plus their failure modes.
+- The wiki reads directly from the same JSON files—updating `components/*.json` instantly updates the wiki on the next deploy.
+- Drop photos into `images/components/<type>/` using the slugified component name (e.g., `images/components/sling/dyneema-sling.jpg`). Supported formats: `.webp`, `.png`, `.jpg`, `.jpeg`, `.svg`.
+- If no matching photo exists the wiki shows a placeholder reminding you where to add one.
+
 ## Running Locally
 
 You must use a local web server to run the game locally (due to browser security restrictions on file loading).
