@@ -46,6 +46,7 @@
       "Check that attached hardware cannot torque against the swivel body."
     ],
     "usage_notes": "If a swivel feels rough or has play in the bearings, pull it from service immediately."
+  },
   {
     "type": "ring",
     "title": "Lowering Rings",
