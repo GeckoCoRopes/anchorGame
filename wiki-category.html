@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Component Wiki | GeckoCo Anchor Game</title>
+  <title>Component Category | GeckoCo Anchor Game</title>
   <link rel="icon" type="image/svg+xml" href="images/Gecko_Square_BlackBG.svg">
   <style>
     :root {
@@ -18,6 +18,16 @@
       --card-radius: 14px;
       --max-width: 1100px;
       font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    .issue-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 0.9rem;
+    }
+    .issue-list strong {
+      color: var(--text);
     }
     * { box-sizing: border-box; }
     body {
@@ -99,62 +109,71 @@
       border: 1px solid var(--border);
       padding: 24px;
     }
-    .category-grid {
+    section h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    section p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
     }
-    .category-card {
+    .component-card {
       background: var(--panel-light);
       border-radius: var(--card-radius);
-      padding: 20px;
       border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      min-height: 220px;
+      overflow: hidden;
+      min-height: 320px;
     }
-    .category-card h2 {
-      margin: 0;
-      font-size: 1.3rem;
-      letter-spacing: 0.04em;
+    .component-card--highlight {
+      box-shadow: 0 0 0 2px var(--accent);
     }
-    .category-card p {
-      margin: 0;
+    .component-card__media {
+      position: relative;
+      padding-top: 56%;
+      background: #0c0c0e;
+      border-bottom: 1px solid var(--border);
+    }
+    .component-card__media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .component-card__media--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
       color: var(--muted);
-      line-height: 1.5;
+      background: repeating-linear-gradient(135deg, #17171d, #17171d 10px, #1f1f27 10px, #1f1f27 20px);
+      text-align: center;
+      padding: 16px;
+    }
+    .component-card__body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       flex: 1;
     }
-    .category-card a {
-      align-self: flex-start;
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .category-card a:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-    footer {
-      max-width: var(--max-width);
-      margin: 40px auto 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-    @media (max-width: 640px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-      }
-      header nav { width: 100%; }
-      header nav a { width: 100%; }
-    }
-  </style>
+    .component-card h3 {
       margin: 0;
       font-size: 1.1rem;
     }
@@ -162,7 +181,6 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.4;
-      flex: none;
     }
     .meta-row {
       display: flex;
@@ -191,35 +209,25 @@
       font-weight: 600;
       margin-bottom: 8px;
     }
-    ul.issue-list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.4;
-      font-size: 0.9rem;
-    }
-    .issue-list strong {
-      color: var(--text);
+    .error {
+      color: #ff7b7b;
+      text-align: center;
     }
     footer {
       max-width: var(--max-width);
       margin: 40px auto 0;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       text-align: center;
     }
     @media (max-width: 640px) {
       header {
         flex-direction: column;
-        align-items: center;
         text-align: center;
+        align-items: center;
       }
-      header nav {
-        width: 100%;
-      }
-      header nav a {
-        width: 100%;
-      }
+      header nav { width: 100%; }
+      header nav a { width: 100%; }
     }
   </style>
 </head>
@@ -227,33 +235,34 @@
   <header>
     <img src="images/Gecko_Square_BlackBG.png" alt="GeckoCo logo" width="72" height="72">
     <div class="hero">
-      <h1>Component Reference</h1>
-      <p>
-        Choose a category to dive into photos, descriptions, and failure modes populated
-        directly from the JSON files that power the game. Each category page includes
-        deeper context plus tips for spotting issues in the field.
-      </p>
+      <h1 data-category-title>Component Category</h1>
+      <p data-category-summary>Loading details…</p>
     </div>
     <nav>
       <a class="primary" href="index.html">Play the Anchor Game</a>
-      <a href="https://github.com/GeckoCoRopes/anchorGame" target="_blank" rel="noopener">View on GitHub</a>
+      <a href="wiki.html">All categories</a>
     </nav>
   </header>
   <main>
+    <section data-category-details hidden>
+      <h2>Overview</h2>
+      <p data-category-long></p>
+      <div data-category-lists></div>
+    </section>
     <section>
-      <div class="category-grid" data-category-grid></div>
+      <h2>Components</h2>
+      <div class="card-grid" data-component-grid></div>
     </section>
     <noscript>
       <p style="color:#fff;">
-        Enable JavaScript to load category information.
+        Enable JavaScript to load category data.
       </p>
     </noscript>
   </main>
   <footer>
-    Data auto-syncs from the JSON files under <code>components/</code>.
-    Drop photos into <code>images/components/&lt;type&gt;/</code> to replace placeholders.
+    Looking for a different category? Visit <a href="wiki.html" style="color:var(--accent);">the index</a>.
   </footer>
-  <script type="module" src="wiki-index.js"></script>
+  <script type="module" src="wiki-category.js"></script>
 </body>
 </html>
 

@@ -15,6 +15,22 @@ const nextBtn = document.getElementById('next-btn');
 // eslint-disable-next-line no-unused-vars
 const difficultySelect = document.getElementById('difficulty-select');
 
+function slugifyName(value) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function getWikiHref(type, name) {
+  const params = new URLSearchParams({ type });
+  if (name) {
+    params.set('component', slugifyName(name));
+  }
+  return `wiki-category.html?${params.toString()}`;
+}
+
 
 let components = {};
 let checkedComponents = {};
@@ -113,7 +129,13 @@ function renderAnchor(anchor) {
       const label = getDisplayName(type);
       typeSpan.textContent = label + ': ';
       li.appendChild(typeSpan);
-      li.appendChild(document.createTextNode(comp.name));
+      const link = document.createElement('a');
+      link.href = getWikiHref(type, comp.name);
+      link.textContent = comp.name;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.title = 'Open wiki entry';
+      li.appendChild(link);
       if (difficulty === 'easy' && checkedComponents[type]) {
         if (checkedComponents[type] === 'fail') {
           li.style.color = '#ffd600';

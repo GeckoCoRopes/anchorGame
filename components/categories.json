@@ -1,0 +1,87 @@
+[
+  {
+    "type": "anchor",
+    "title": "Anchors",
+    "short_desc": "Primary attachment points such as bolts, beams, or glue-in eyes.",
+    "long_desc": "Anchors are the fixed points that ultimately carry the full system load. They can be purpose-built hardware (bolts, glue-ins) or improvised structures like beams. Understanding the material, installation quality, and rating of an anchor is critical because every other component in the chain relies on it.",
+    "inspection_tips": [
+      "Check for corrosion, spinning bolts, or missing hardware.",
+      "Confirm the anchor is rated and was installed by a qualified rigger.",
+      "Look for cracks, soft materials, or sharp edges that could damage soft goods."
+    ],
+    "usage_notes": "Always back up improvised anchors and demand documented ratings for permanent fixtures."
+  },
+  {
+    "type": "top_connector",
+    "title": "Top Connectors",
+    "short_desc": "Hardware that links the anchor into the rest of the system.",
+    "long_desc": "Top connectors are usually carabiners, quick-links, or specialized plates that attach directly to the anchor. Because they bridge the anchor and the remainder of the rig, they must be oriented correctly and locked. This position frequently sees tri-axial loading or lever forces.",
+    "inspection_tips": [
+      "Confirm gates are locked and not cross-loaded.",
+      "Inspect for burrs or grooves that could cut into slings.",
+      "Ensure compatibility with whatever hardware the anchor provides."
+    ],
+    "usage_notes": "Use steel connectors for fixed installations; aluminum hardware can groove over time."
+  },
+  {
+    "type": "sling",
+    "title": "Slings",
+    "short_desc": "Soft goods or chains that extend the system and equalize loads.",
+    "long_desc": "Slings transfer load from the top connector down toward the working end. They may be sewn nylon, Dyneema, chain, or improvised webbing. Because they are flexible links, they are vulnerable to abrasion, UV damage, and twists that create shock-loading.",
+    "inspection_tips": [
+      "Feel for soft spots, cuts, or stiffened sections.",
+      "Check tags or color-coding for strength ratings and retirement criteria.",
+      "Verify the sling runs over smooth, padded surfaces or is otherwise protected from edges."
+    ],
+    "usage_notes": "Retire slings that show unknown history or any core exposure."
+  },
+  {
+    "type": "middle_connector",
+    "title": "Middle Connectors",
+    "short_desc": "Interfaces between slings and swivels, often taking twisting loads.",
+    "long_desc": "Middle connectors keep the system modular, letting slings interface with swivels or other hardware. They experience multi-directional loading and tend to get crowded with metal-on-metal contact if the build is messy.",
+    "inspection_tips": [
+      "Look for misaligned gates or tri-axial loading.",
+      "Ensure sufficient space so hardware doesn’t bind when loaded.",
+      "Confirm every gate is locked and oriented away from abrasive surfaces."
+    ],
+    "usage_notes": "Consider captive bar carabiners or quick-links to maintain orientation."
+  },
+  {
+    "type": "swivel",
+    "title": "Swivels",
+    "short_desc": "Allow the load to rotate without twisting ropes or slings.",
+    "long_desc": "Swivels prevent rope twist and help riders rotate freely. They add moving parts to the system, which demands extra inspection. Some scenarios intentionally omit swivels to reduce complexity; others require them to avoid spin-up.",
+    "inspection_tips": [
+      "Spin the swivel to feel for grit, notchiness, or uneven resistance.",
+      "Verify the manufacturer’s rating is legible and appropriate.",
+      "Check that attached hardware cannot torque against the swivel body."
+    ],
+    "usage_notes": "If a swivel feels rough or has play in the bearings, pull it from service immediately."
+  },
+  {
+    "type": "bottom_connector",
+    "title": "Bottom Connectors",
+    "short_desc": "Hardware linking swivels to the final lowering ring.",
+    "long_desc": "Bottom connectors often see the most abuse because they sit near riders and rope movement. They must resist side loading, gate flutter, and rope wear. This is also the junction where repeated cycles can loosen screw sleeves.",
+    "inspection_tips": [
+      "Verify screw sleeves are tight and backed up.",
+      "Check for rope grooves, sharp edges, or burrs.",
+      "Ensure orientation keeps the gate away from rubbing ropes."
+    ],
+    "usage_notes": "Replace connectors that show more than superficial grooving or any deformation."
+  },
+  {
+    "type": "ring",
+    "title": "Lowering Rings",
+    "short_desc": "Final hard points that the rope actually runs through.",
+    "long_desc": "Rings, quick-links, or other rounded hardware act as the final directional for the rope. They must be perfectly smooth because any imperfection will damage ropes quickly. Since they see constant friction, they are usually the fastest-wearing metal in the system.",
+    "inspection_tips": [
+      "Run a cloth through the ring to detect hidden burrs.",
+      "Look for flat spots, discoloration from overheating, or sharp lips.",
+      "Confirm sizing matches the rope diameter to avoid pinching."
+    ],
+    "usage_notes": "Flip or replace rings proactively; never leave a deeply grooved ring in service."
+  }
+]
+
