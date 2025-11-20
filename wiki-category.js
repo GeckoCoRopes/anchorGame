@@ -216,11 +216,6 @@ function showError(message) {
 function renderCategoryNav(categories, activeType) {
   if (!categoryNav) return;
   categoryNav.innerHTML = '';
-  const allLink = document.createElement('a');
-  allLink.href = 'wiki.html';
-  allLink.textContent = 'All categories';
-  categoryNav.appendChild(allLink);
-
   categories.forEach((category) => {
     const link = document.createElement('a');
     link.href = `wiki-category.html?type=${encodeURIComponent(category.type)}`;
