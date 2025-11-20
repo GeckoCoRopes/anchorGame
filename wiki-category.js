@@ -4,6 +4,7 @@ const detailsSection = document.querySelector('[data-category-details]');
 const longDescEl = document.querySelector('[data-category-long]');
 const listsContainer = document.querySelector('[data-category-lists]');
 const componentGrid = document.querySelector('[data-component-grid]');
+const categoryNav = document.querySelector('[data-category-nav]');
 
 const params = new URLSearchParams(window.location.search);
 const typeParam = params.get('type');
@@ -201,12 +202,32 @@ function showError(message) {
   componentGrid.replaceWith(errorEl);
 }
 
+function renderCategoryNav(categories, activeType) {
+  if (!categoryNav) return;
+  categoryNav.innerHTML = '';
+  const allLink = document.createElement('a');
+  allLink.href = 'wiki.html';
+  allLink.textContent = 'All categories';
+  categoryNav.appendChild(allLink);
+
+  categories.forEach((category) => {
+    const link = document.createElement('a');
+    link.href = `wiki-category.html?type=${encodeURIComponent(category.type)}`;
+    link.textContent = category.title;
+    if (category.type === activeType) {
+      link.classList.add('is-active');
+    }
+    categoryNav.appendChild(link);
+  });
+}
+
 async function loadCategory(type) {
   const res = await fetch('components/categories.json');
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText}`);
   }
   const categories = await res.json();
+  renderCategoryNav(categories, type);
   const match = categories.find((item) => item.type === type);
   if (!match) {
     throw new Error(`Unknown category '${type}'`);
