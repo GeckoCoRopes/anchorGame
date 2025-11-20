@@ -13,24 +13,10 @@ const focusParam = params.get('component');
 const typeToFile = {
   anchor: 'anchor',
   connector: 'connector',
-  top_connector: 'connector',
-  middle_connector: 'connector',
   sling: 'sling',
   swivel: 'swivel',
-  bottom_connector: 'connector',
   ring: 'ring',
 };
-
-const canonicalTypeMap = {
-  connector: 'connector',
-  top_connector: 'connector',
-  middle_connector: 'connector',
-  bottom_connector: 'connector',
-};
-
-function getCanonicalType(type) {
-  return canonicalTypeMap[type] || type;
-}
 
 function slugify(value) {
   return value
@@ -228,17 +214,16 @@ function renderCategoryNav(categories, activeType) {
   });
 }
 
-async function loadCategory(type, canonicalType) {
+async function loadCategory(type) {
   const res = await fetch('components/categories.json');
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText}`);
   }
   const categories = await res.json();
-  const activeType = canonicalType || type;
-  renderCategoryNav(categories, activeType);
-  const match = categories.find((item) => item.type === activeType);
+  renderCategoryNav(categories, type);
+  const match = categories.find((item) => item.type === type);
   if (!match) {
-    throw new Error(`Unknown category '${activeType}'`);
+    throw new Error(`Unknown category '${type}'`);
   }
   renderCategoryDetails(match);
   return match;
@@ -276,9 +261,8 @@ async function init() {
     showError('Select a category from the wiki index.');
     return;
   }
-  const canonicalType = getCanonicalType(typeParam);
   try {
-    await loadCategory(typeParam, canonicalType);
+    await loadCategory(typeParam);
     await loadComponents(typeParam);
     if (focusParam) {
       focusComponent(focusParam);
