@@ -26,6 +26,26 @@
       justify-self: end;
       white-space: nowrap;
     }
+    .resource-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .resource-link {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #444;
+      text-decoration: none;
+      color: #ffd600;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .resource-link:hover {
+      background: #333;
+      color: #fff;
+    }
     #anchor-components-chosen {
       color: #fff;
       display: grid;
@@ -36,6 +56,16 @@
     }
     #anchor-components-chosen li {
       display: contents;
+    }
+    #anchor-components-chosen a {
+      color: currentColor;
+      text-decoration: none;
+      border-bottom: 1px dotted #555;
+      padding-bottom: 1px;
+    }
+    #anchor-components-chosen a:hover {
+      color: #ffd600;
+      border-color: #ffd600;
     }
     @media (max-width: 600px) {
       #anchor-container { padding: 4vw 2vw 18vw 2vw; }
@@ -52,6 +82,10 @@
       <span id="score-passed">Passed: 0</span>
       <span id="score-failed">Failed: 0</span>
       <span id="score-skipped">Skipped: 0</span>
+    </div>
+    <div class="resource-row">
+      <a class="resource-link" href="wiki.html">Component wiki</a>
+      <a class="resource-link" href="https://github.com/GeckoCoRopes/anchorGame" target="_blank" rel="noopener">GitHub repo</a>
     </div>
     <div style="display: flex; align-items: flex-start; gap: 32px;">
       <a href="https://geckocoropes.au" target="_blank" rel="noopener" style="display: flex; align-items: flex-start;">
@@ -111,7 +145,7 @@
         <img id="gecko-img" src="images/GECKO_horizontal_BlackBG.png" alt="Gecko Horizontal" title="Visit Gecko Co Ropes" style="display:block; width:100%; max-width:100%; height:auto; margin:0 auto;" />
       </a>
     </div>
-    <div id="commit-hash" style="text-align:center; color:#888; font-size:0.95em; margin-top:18px;">Commit: 37323ae</div>
+    <div id="commit-hash" style="text-align:center; color:#888; font-size:0.95em; margin-top:18px;">Commit: e358544</div>
     <div id="version-number" style="text-align:center; color:#888; font-size:0.95em; margin-top:4px;">Version: 0.1.11</div>
   </div>
   <script type="module" src="game.js"></script>

@@ -2,6 +2,7 @@
   {
     "name": "Ball Bearing Swivel",
     "desc": "Prevents rope twist under load.",
+    "long_desc": "The standard aerial swivel houses sealed bearings to isolate rotation from the anchor chain. When clean it feels buttery smooth; when contaminated it grinds, heats up, and can seize mid-spin. Keep grit out of the bearings, avoid side-loading, and retire any swivel that develops play or notches.",
     "incompatible_with": ["anchor"],
     "potential_issues": [
       { "key": ["bearing", "corrosion", "rust"], "issue": "Bearing seized", "text_description": "The ball bearing is rusted and does not rotate.", "failure": true },
@@ -11,6 +12,7 @@
   {
     "name": "None",
     "desc": "",
+    "long_desc": "Choosing to omit a swivel simplifies the rig and removes moving parts, but the cost is that all spins and twists fight through the anchor. Screw eyes, trees, and improvised anchors can unscrew under that torsion. Only skip the swivel when you have anti-rotation strategies and vigilant inspection.",
     "incompatible_with": [],
     "potential_issues": [
       { "key": ["rotation"], "issue": "No swivel", "text_description": "Not having a swivel will transmit all rotations to the anchor. An eyebolt, particularly a screw one may fail.", "failure": true }
@@ -19,6 +21,7 @@
   {
     "name": "Integrated Swivel",
     "desc": "Built into the connector for compactness.",
+    "long_desc": "Some modern connectors build the swivel straight into the carabiner or plate to reduce stack height. They are sleek but harder to inspect because the bearing is hidden and the unit cannot be disassembled for cleaning. Stick to rated hardware, protect it from side torque, and replace the whole unit if any grinding appears.",
     "incompatible_with": ["anchor"],
     "potential_issues": [
       { "key": ["bearing", "damage"], "issue": "Bearing cracked", "text_description": "A crack is visible in the integrated bearing.", "failure": true },

@@ -2,24 +2,28 @@
   { 
     "name": "Sling Over Solid Beam", 
     "desc": "A sling draped over a solid structural beam.",
+    "long_desc": "A sling or round sling placed across a structural beam. The ends have been attached together with the connector.\n\nA 25mm nylon sling is suitable for this purpose for short term use, but for fixed placements an industrial roundsling is more suitable.\n\nEnsure that both ends of the sling are correctly attatched to the connector. ",
     "potential_issues": [
       { "key": ["wear", "abrasion"], "issue": "Sling abrasion", "text_description": "The sling is being abraded by the sharp edge of the beam.", "failure": true },
-      { "key": ["moving", "loose"], "issue": "Sling slipping", "text_description": "The sling is not properly secured and may slip off the beam.", "failure": true },
-      { "key": ["rating", "strength", "load"], "issue": "Unrated beam", "text_description": "This beam has no visible strength rating or engineering certification.", "failure": true }
+      { "key": ["moving", "loose"], "issue": "Sling not attatched", "text_description": "The sling is not properly secured to the connector,and may slip off the beam when loaded.", "failure": true },
+      { "key": ["moving", "cracked", "damage"], "issue": "Damaged beam", "text_description": "The beam is damaged or cracked, and has been weakened. It is insufficient for the load.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Weak beam", "text_description": "This beam is insufficient to sustain the load.", "failure": true }
     ]
   }, 
   { 
     "name": "Sling Girth Hitched to Solid Beam", 
     "desc": "A sling girth hitched around a solid structural beam.",
+    "long_desc": "A sling or round sling placed across a structural beam. One end is passed through the other forming a Girth Hitch. This reduces the strength substatially, but decreases the volume of sling that must be put into the connector.\n\nA 25mm nylon sling is suitable for this purpose for short term use, but it is best used for fixed placements with an industrial roundsling.\n\nEnsure that it has a hitch, and the connector is attached to the correct end.\n\nAs the sling does not move much, it will be subjected to less wear, but you will need to unload it, and shift the knot to see any wear that is occuring.",
     "potential_issues": [
       { "key": ["wear", "abrasion"], "issue": "Sling abrasion", "text_description": "The sling is being abraded by the sharp edge of the beam.", "failure": true },
-      { "key": ["knot", "girth"], "issue": "Girth hitch slipping", "text_description": "The girth hitch is not properly tensioned and may slip.", "failure": true },
-      { "key": ["rating", "strength", "load"], "issue": "Unrated beam", "text_description": "This beam has no visible strength rating or engineering certification.", "failure": true }
+      { "key": ["knot", "girth"], "issue": "Girth hitch is not tied", "text_description": "The girth hitch is not properly tied, and loading the point will cause it to fail.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Weak beam", "text_description": "This beam is insufficient to sustain the load.", "failure": true }
     ]
   }, 
   { 
     "name": "Single hanger - dynabolt", 
     "desc": "A permanent, solid anchor in hard surfaces.",
+    "long_desc": "Classic fixed hardware in gyms and cliffs: a single expansion bolt with a hanger. It is only as trustworthy as the installer, substrate, and age. Repeated shock loading, corrosion, or spinning bolts all indicate retirement. Because it is a single point, always assume it can fail and pair it with an independent backup whenever humans hang beneath it.",
     "potential_issues": [
       { "key": ["moving", "loose"], "issue": "The bolt is loose!", "text_description": "The bolt is moving. It may fail at any time.", "failure": true },
       { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
@@ -28,8 +32,19 @@
     "requires": "swivel"
   }, 
   { 
+    "name": "Plate hanger - 2 dynabolts", 
+    "desc": "A permanent, solid anchor in hard surfaces.",
+    "long_desc": "A solid industrial anchor: a suitable plate with a fixed eye, secured with a pair of dynabolts.\n\nProvided that the plate is adequate, the pair of dynabolts provides redundancy. They aren't cheap, nor light, but they're typically solid.",
+    "potential_issues": [
+      { "key": ["moving", "loose"], "issue": "The bolt is loose!", "text_description": "The bolt is moving. It may fail at any time.", "failure": true },
+      { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
+      { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
+    ]
+  }, 
+  { 
     "name": "Glue-In Eye", 
     "desc": "A permanent, high-strength glue-in anchor.",
+    "long_desc": "Glue-ins distribute load across a long bonded shaft, making them some of the strongest anchors when installed correctly. They require professional installation, careful mixing of resin, and immaculate rock or concrete. Even though they look bomber, inspect for spinning, discoloration, voids around the glue, and mismatched hardware before trusting life to them.",
     "potential_issues": [
       { "key": ["moving", "loose"], "issue": "The eye bolt is loose!", "text_description": "The eyebolt is moving. The glue has failed.", "failure": true },
       { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
@@ -39,6 +54,7 @@
   {
     "name": "Screw-In Eye",
     "desc": "An eye bolt threaded into timber or steel.",
+    "long_desc": "A threaded eye makes sense for theater grids, trees, or exposed beams, but it is prone to gradual loosening as the wood dries or the steel flexes. Without a locking nut or backing plate the entire anchor can unwind. Treat every screw-in eye as temporary, check for pitchy motion before loading, and never let it see rotation without a swivel.",
     "potential_issues": [
       { "key": ["tight", "loose", "unscrew"], "issue": "The eye bolt is loose!", "text_description": "The eyebolt is not secured tightly. It may unscrew further, or it may fail without warning.", "failure": true },
       { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },

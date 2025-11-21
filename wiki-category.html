@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Component Category | GeckoCo Anchor Game</title>
+  <link rel="icon" type="image/svg+xml" href="images/Gecko_Square_BlackBG.svg">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f11;
+      --panel: #1b1b1f;
+      --panel-light: #23232a;
+      --border: #2c2c34;
+      --text: #f6f6f6;
+      --muted: #b3b3c2;
+      --accent: #ffd600;
+      --card-radius: 14px;
+      --max-width: 1100px;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    .issue-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 0.9rem;
+    }
+    .issue-list strong {
+      color: var(--text);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      padding: 32px 16px 64px;
+    }
+    header {
+      max-width: var(--max-width);
+      margin: 0 auto 32px;
+      padding: 24px;
+      background: linear-gradient(135deg, #141419, #1e1e24);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    header img {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+    header .hero { flex: 1; }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: 0.03em;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    header nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    header nav a {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text);
+      text-align: center;
+      font-weight: 600;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    header nav a.primary {
+      background: var(--accent);
+      color: #1b1500;
+      border-color: transparent;
+    }
+    header nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    header nav a.primary:hover {
+      filter: brightness(1.1);
+      color: #1b1500;
+    }
+    .category-nav {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .category-nav a {
+      flex: 1 1 120px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .category-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .category-nav a.is-active {
+      background: var(--accent);
+      color: #1b1500;
+      border-color: transparent;
+    }
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    section {
+      background: var(--panel);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+    section h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    section p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .component-card {
+      background: var(--panel-light);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 320px;
+    }
+    .component-card--highlight {
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .component-card__media {
+      position: relative;
+      padding-top: 56%;
+      background: #0c0c0e;
+      border-bottom: 1px solid var(--border);
+    }
+    .component-card__media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .component-card__media--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--muted);
+      background: repeating-linear-gradient(135deg, #17171d, #17171d 10px, #1f1f27 10px, #1f1f27 20px);
+      text-align: center;
+      padding: 16px;
+    }
+    .component-card__body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .component-card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .component-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .component-card__long {
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .chip {
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    details {
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      padding-top: 12px;
+    }
+    details summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .error {
+      color: #ff7b7b;
+      text-align: center;
+    }
+    footer {
+      max-width: var(--max-width);
+      margin: 40px auto 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      header nav { width: 100%; }
+      header nav a { width: 100%; }
+      .category-nav {
+        justify-content: center;
+      }
+      .category-nav a {
+        flex: 1 1 45%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/Gecko_Square_BlackBG.png" alt="GeckoCo logo" width="72" height="72">
+    <div class="hero">
+      <h1 data-category-title>Component Category</h1>
+      <p data-category-summary>Loading details…</p>
+    </div>
+    <nav>
+      <a class="primary" href="index.html">Play the Anchor Game</a>
+      <a href="wiki.html">All categories</a>
+    </nav>
+    <div class="category-nav" data-category-nav></div>
+  </header>
+  <main>
+    <section data-category-details hidden>
+      <h2>Overview</h2>
+      <p data-category-long></p>
+      <div data-category-lists></div>
+    </section>
+    <section>
+      <h2>Components</h2>
+      <div class="card-grid" data-component-grid></div>
+    </section>
+    <noscript>
+      <p style="color:#fff;">
+        Enable JavaScript to load category data.
+      </p>
+    </noscript>
+  </main>
+  <footer>
+    Looking for a different category? Visit <a href="wiki.html" style="color:var(--accent);">the index</a>.
+  </footer>
+  <script type="module" src="wiki-category.js"></script>
+</body>
+</html>
+

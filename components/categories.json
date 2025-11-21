@@ -1,0 +1,67 @@
+[
+  {
+    "type": "anchor",
+    "title": "Anchors",
+    "short_desc": "Primary attachment points such as bolts, beams, or glue-in eyes.",
+    "long_desc": "Anchors are the fixed points that ultimately carry the full system load. They can be purpose-built hardware (bolts, glue-ins) or improvised structures like beams. Understanding the material, installation quality, and rating of an anchor is critical because every other component in the chain relies on it.",
+    "inspection_tips": [
+      "Check for corrosion, spinning bolts, or missing hardware.",
+      "Confirm the anchor is rated and was installed by a qualified rigger.",
+      "Look for cracks, soft materials, or sharp edges that could damage soft goods."
+    ],
+    "usage_notes": "Always back up improvised anchors and demand documented ratings for permanent fixtures."
+  },
+  {
+    "type": "connector",
+    "title": "Connectors",
+    "short_desc": "Carabiners, maillons, and links that tie every stage of the system together.",
+    "long_desc": "Whether they live at the anchor, between a swivel, or directly above the ring, connectors all perform the same job: translate load from one component into the next. Because they can see odd tri-axial forces and crowding, each connector must be oriented, locked, and inspected with the same care regardless of where it sits in the stack.",
+    "inspection_tips": [
+      "Confirm every gate or sleeve is locked and cannot vibrate open.",
+      "Inspect for grooves, burrs, or corrosion that could damage nearby slings or ropes.",
+      "Check that connectors are not cross-loaded, tri-axially loaded, or forced against each other.",
+      "Permanent installations should be easy to inspect from the ground - use shackles with visible mousing."
+    ],
+    "usage_notes": "Connectors should be chosen carefully to minimise the risks. For personal use, aluminium screwgates and 16mm nylon slings are suitable. For permanent installations, or where abrasion is a concern. Stainless steel connectors, maillons or shackles are most suitable."
+  },
+  {
+    "type": "sling",
+    "title": "Slings",
+    "short_desc": "Soft goods or chains that extend the system and equalize loads.",
+    "long_desc": "Slings transfer load from the top connector down toward the ring. They may be sewn nylon, Dyneema, chain, or webbing. Because they are flexible links, they are vulnerable to abrasion, UV damage, and twists that accelerate wear.",
+    "inspection_tips": [
+      "Feel for soft spots, cuts, or stiffened sections.",
+      "Check tags or color-coding for strength ratings and retirement criteria.",
+      "Verify the sling runs over smooth, padded surfaces or is otherwise protected from edges."
+    ],
+    "usage_notes": "Retire slings that show unknown history or any core exposure."
+  },
+  {
+    "type": "swivel",
+    "title": "Swivels",
+    "short_desc": "A swivel allows the load to rotate without twisting the rigging.",
+    "long_desc": "Swivels prevent rope twist and allow the load to rotate freely. A swivel is necessarily a single point of failure, so it must be selected and inspected carefully. Using a swivel will reduce the risks associated with some anchors, but these are better avoided by using suitable anchors.",
+    "inspection_tips": [
+      "Spin the swivel to feel for grit, notchiness, or uneven resistance.",
+      "Verify the manufacturer’s rating is legible and appropriate.",
+      "Check that attached hardware cannot torque against the swivel body.",
+      "Check for damage or wear to the swivel connections. "
+    ],
+    "usage_notes": "If a swivel feels rough or has play in the bearings, pull it from service immediately."
+  },
+  {
+    "type": "ring",
+    "title": "Rings & Plates",
+    "short_desc": "Final hard points that the rope actually runs through.",
+    "long_desc": "Rings or plates act as the final part of our system, allowing the attachment of several uplines, either directly, or using carabiners. They must be strong in any orientation as they are subjected to variable loading. Any ring or plate that has the rope pass through or over it directly must be smooth and free from damage",
+    "inspection_tips": [
+      "Run a cloth through the ring to detect hidden burrs.",
+      "Look for flat spots, discoloration from overheating, or sharp lips.",
+      "Confirm sizing matches the rope diameter to avoid pinching.",
+      "Ensure they are rated and fit for purpose",
+      "Know the material and suitability - Cast rings are not suitable."
+    ],
+    "usage_notes": "Flip or replace rings proactively; never leave a deeply grooved ring in service."
+  }
+]
+

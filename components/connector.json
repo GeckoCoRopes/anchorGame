@@ -2,6 +2,7 @@
   {
     "name": "None",
     "desc": "The sling is connected directly to the anchor",
+    "long_desc": "The simplest connection skips extra hardware and lets webbing sit straight on the anchor hardware. It is compact but unforgiving: any movement grinds fibers, and there is no redundancy if the sling shifts or melts. Reserve this approach for quick checks, add padding, and plan to upgrade before putting weight on it for long durations.",
     "potential_issues": [
       { "key": ["wear"], "issue": "The sling is abraded", "text_description": "The sling is moving directly on the hanger, and has abraded over time.", "failure": true }
     ]
@@ -9,6 +10,7 @@
   {
     "name": "Girth hitch",
     "desc": "The sling is connected directly to the anchor",
+    "long_desc": "Girth hitching cinches the sling tight to the anchor, which helps keep things tidy but concentrates friction at the choke point. If the anchor hardware is narrow, the hitch can deform and cut into itself. Use round-stock anchors, rotate wear spots, and avoid pairing with sharp or incompatible hardware like chains.",
     "incompatible_with": ["Chain of Carabiners", "Welded Chain"],
     "potential_issues": [
       { "key": ["wear"], "issue": "The sling is abraded", "text_description": "The sling is moving directly on the hanger, and has abraded over time.", "failure": true }
@@ -18,6 +20,7 @@
   {
     "name": "Snap gate carabiner",
     "desc": "A simple carabiner.",
+    "long_desc": "Snap gates are great for fast clipping but rely entirely on spring tension. In anchor stacks they see odd cross-loading and vibration, which can open the gate under load. Limit them to redundant systems, load them on their spine only, and retire any biner with rough gates or mystery history.",
     "potential_issues": [
       { "key": ["gate"],  "issue": "The gate is sticky", "text_description": "The gate does not close easily, and may stay stuck in the open position.", "failure": true },
       { "key": ["wear"],  "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
@@ -28,6 +31,7 @@
   {
     "name": "Maillon Rapide",
     "desc": "Oval-shaped, strong, and reliable.",
+    "long_desc": "Steel screw links shine where compact strength and long-term installs matter. Once tightened they behave like a closed ring and resist tri-axial loads far better than aluminum biners. The catch is that users forget to fully close them or fail to torque them after use. Keep a small wrench handy and mark the sleeve so you can see if it walks.",
     "potential_issues": [
       { "key": ["gate"], "issue": "Gate left open", "text_description": "The gate was left open by mistake.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated maillon", "text_description": "This maillon was sourced from a hardware store and has no markings.", "failure": true }
@@ -36,6 +40,7 @@
   {
     "name": "Bow Shackle",
     "desc": "U-shaped steel shackle with a removable pin.",
+    "long_desc": "Bow shackles offer generous interior space, letting multiple slings or swivels stack without binding. They are built from massive forged steel but only as safe as their pin torque and safety wire. Always snug finger-tight then back off a quarter-turn to prevent seizing, and inspect the threads for grit before every session.",
     "potential_issues": [
       { "key": ["pin"], "issue": "Pin not secured", "text_description": "The shackle pin is not properly tightened or secured.", "failure": true },
       { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
@@ -45,6 +50,7 @@
   {
     "name": "D Shackle",
     "desc": "D-shaped steel shackle with a removable pin.",
+    "long_desc": "D shackles narrow the basket compared to bow shackles, orienting loads better for linear pulls. They are ideal between swivels and rings but can side-load if too many components crowd them. Treat them like life-safety bolts: only use rated hardware, keep threads pristine, and verify the pin has not crept out mid-session.",
     "potential_issues": [
       { "key": ["pin"], "issue": "Pin not secured", "text_description": "The shackle pin is not properly tightened or secured.", "failure": true },
       { "key": ["damage", "corrosion", "rust"], "issue": "Corrosion", "text_description": "Rust has weakened the metal.", "failure": true },
@@ -54,6 +60,7 @@
   {
     "name": "Welded Ring",
     "desc": "A closed steel ring for permanent connections.",
+    "long_desc": "Welded rings behave like mini anchor plates, offering smooth load paths without moving parts. Because they live in one orientation for months, grooves can appear where slings bear down. Feel for ridges, look for poorly finished welds, and replace rings that show corrosion or egg-shaping.",
     "potential_issues": [
       { "key": ["weld", "damage"], "issue": "Weld defect", "text_description": "A hidden crack in the weld.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
@@ -62,6 +69,7 @@
   {
     "name": "Locking Carabiner",
     "desc": "Secure, screw locked gate.",
+    "long_desc": "Lockers are the default connector for most rigs. The screw or auto-lock adds redundancy against the gate popping open, but only if the user actually engages it. Keep dirt out of the threads, back up opposing carabiners when possible, and retire any locker that develops grooves, burs, or sticky sleeves.",
     "potential_issues": [
       { "key": ["gate"], "issue": "Gate not locked", "text_description": "The Screwgate has not been done up.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
@@ -70,6 +78,7 @@
   {
     "name": "Delta Link",
     "desc": "Triangular steel maillon connector.",
+    "long_desc": "Delta maillons create a compact, plate-like junction perfect for attaching seat harnesses, swivels, or multiple slings. Their flat sides resist rotation, but the corners can bind if hardware sits crooked. Tighten them with a wrench, load the long side whenever possible, and swap them out if threads feel gritty.",
     "potential_issues": [
       { "key": ["gate"], "issue": "Improper closure", "text_description": "The delta link was not fully closed.", "failure": true },
       { "key": ["rating", "strength", "load"], "issue": "Unrated Hanger and/or bolt", "text_description": "This system is not rated for use.", "failure": true }
@@ -78,6 +87,7 @@
   {
     "name": "Soft Shackle",
     "desc": "Lightweight textile connector.",
+    "long_desc": "Soft shackles save weight and remove metal-on-metal wear, but they rely entirely on correct knot construction and fiber condition. Dirt, UV, or a poorly dressed diamond knot can destroy their strength. Keep them dedicated to clean anchors, inspect the bury each use, and never mix them with sharp hardware or incompatible chains.",
     "potential_issues": [
       { "key": ["knot"],  "issue": "Knot slips", "text_description": "The knot in the soft shackle slipped.", "failure": true },
       { "key": ["knot"],  "issue": "Knot is badly formed", "text_description": "This homemade soft shackle doesn't seem to have been made properly.", "failure": true },

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Component Wiki | GeckoCo Anchor Game</title>
+  <link rel="icon" type="image/svg+xml" href="images/Gecko_Square_BlackBG.svg">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f11;
+      --panel: #1b1b1f;
+      --panel-light: #23232a;
+      --border: #2c2c34;
+      --text: #f6f6f6;
+      --muted: #b3b3c2;
+      --accent: #ffd600;
+      --card-radius: 14px;
+      --max-width: 1100px;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      padding: 32px 16px 64px;
+    }
+    header {
+      max-width: var(--max-width);
+      margin: 0 auto 32px;
+      padding: 24px;
+      background: linear-gradient(135deg, #141419, #1e1e24);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    header img {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+    header .hero { flex: 1; }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: 0.03em;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    header nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    header nav a {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: var(--text);
+      text-align: center;
+      font-weight: 600;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    header nav a.primary {
+      background: var(--accent);
+      color: #1b1500;
+      border-color: transparent;
+    }
+    header nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    header nav a.primary:hover {
+      filter: brightness(1.1);
+      color: #1b1500;
+    }
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    section {
+      background: var(--panel);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .category-card {
+      background: var(--panel-light);
+      border-radius: var(--card-radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 220px;
+    }
+    .category-card h2 {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+    }
+    .category-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .category-card a {
+      align-self: flex-start;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .category-card a:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    footer {
+      max-width: var(--max-width);
+      margin: 40px auto 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      header nav { width: 100%; }
+      header nav a { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/Gecko_Square_BlackBG.png" alt="GeckoCo logo" width="72" height="72">
+    <div class="hero">
+      <h1>Component Reference</h1>
+      <p>
+        Choose a category to dive into photos, descriptions, and failure modes populated
+        directly from the JSON files that power the game. Each category page includes
+        deeper context plus tips for spotting issues in the field.
+      </p>
+    </div>
+    <nav>
+      <a class="primary" href="index.html">Play the Anchor Game</a>
+      <a href="https://github.com/GeckoCoRopes/anchorGame" target="_blank" rel="noopener">View on GitHub</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <div class="category-grid" data-category-grid></div>
+    </section>
+    <noscript>
+      <p style="color:#fff;">
+        Enable JavaScript to load category information.
+      </p>
+    </noscript>
+  </main>
+  <footer>
+    Data auto-syncs from the JSON files under <code>components/</code>.
+    Drop photos into <code>images/components/&lt;type&gt;/</code> to replace placeholders.
+  </footer>
+  <script type="module" src="wiki-index.js"></script>
+</body>
+</html>
+
